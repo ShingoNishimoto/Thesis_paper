@@ -286,9 +286,6 @@ INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin8.tfm
 INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/min8.tfm
-INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth8.tfm
-INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/goth8.tfm
-INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
 INPUT d:/Document/lab/Research/Thesis/paper/figure/cause_of_failure.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/cause_of_failure.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/cause_of_failure.png
@@ -307,13 +304,15 @@ INPUT d:/Document/lab/Research/Thesis/paper/figure/fault_diagnosis_flow.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/fault_diagnosis_flow.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/fault_diagnosis_flow.png
 INPUT extractbb -B cropbox -O figure/fault_diagnosis_flow.png
+INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin6.tfm
+INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/min6.tfm
 INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm
 INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/ptex-fonts/standard/goth10.tfm
 INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
-INPUT d:/Document/lab/Research/Thesis/paper/figure/simple_sat.png
-INPUT d:/Document/lab/Research/Thesis/paper/figure/simple_sat.png
-INPUT d:/Document/lab/Research/Thesis/paper/figure/simple_sat.png
-INPUT extractbb -B cropbox -O figure/simple_sat.png
+INPUT d:/Document/lab/Research/Thesis/paper/figure/satellite_diagram.PNG
+INPUT d:/Document/lab/Research/Thesis/paper/figure/satellite_diagram.PNG
+INPUT d:/Document/lab/Research/Thesis/paper/figure/satellite_diagram.PNG
+INPUT extractbb -B cropbox -O figure/satellite_diagram.PNG
 INPUT d:/Document/lab/Research/Thesis/paper/figure/port_definition.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/port_definition.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/port_definition.png
@@ -334,4 +333,9 @@ INPUT d:/Document/lab/Research/Thesis/paper/figure/check_list.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/check_list.png
 INPUT d:/Document/lab/Research/Thesis/paper/figure/check_list.png
 INPUT extractbb -B cropbox -O figure/check_list.png
+INPUT d:/Document/lab/Research/Thesis/paper/paper.bbl
+INPUT d:/Document/lab/Research/Thesis/paper/paper.bbl
+INPUT d:/Document/lab/Research/Thesis/paper/paper.bbl
+INPUT d:/Document/lab/Research/Thesis/paper/paper.bbl
+INPUT d:/Application/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT d:/Document/lab/Research/Thesis/paper/paper.aux

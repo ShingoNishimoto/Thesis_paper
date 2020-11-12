@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.3-191112-2.6 (utf8.sjis) (TeX Live 2020/W32TeX) (preloaded format=platex 2020.11.9)  11 NOV 2020 10:17
+This is e-pTeX, Version 3.14159265-p3.8.3-191112-2.6 (utf8.sjis) (TeX Live 2020/W32TeX) (preloaded format=platex 2020.11.9)  12 NOV 2020 10:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -248,27 +248,8 @@ LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 88.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 88.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 92.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 92.
-
-LaTeX Warning: Citation `Langer2016' on page 1 undefined on input line 92.
-
-
-LaTeX Warning: Citation `Langer2016' on page 1 undefined on input line 95.
-
-
-LaTeX Warning: Citation `Venturini2017' on page 1 undefined on input line 100.
-
-
-LaTeX Warning: Citation `Venturini2017' on page 1 undefined on input line 103.
-
 File: figure/cause_of_failure.png Graphic file (type bmp)
 <figure/cause_of_failure.png>
-
-LaTeX Warning: Citation `Venturini2017' on page 1 undefined on input line 109.
-
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
 Make it at least 13.59999pt.
@@ -278,75 +259,36 @@ This may cause the page layout to be inconsistent, however.
 [1
 
 ]
-
-LaTeX Warning: Citation `SHIRASAKA2011' on page 2 undefined on input line 117.
-
-
-LaTeX Warning: Citation `SHIRASAKA2011' on page 2 undefined on input line 123.
-
-
-LaTeX Warning: Citation `SAITO2011' on page 2 undefined on input line 147.
-
-
-LaTeX Warning: Citation `SAITO2011' on page 2 undefined on input line 160.
-
 File: figure/on_orbit_error_tyoe.png Graphic file (type bmp)
 <figure/on_orbit_error_tyoe.png>
-
-LaTeX Warning: Citation `SAITO2011' on page 2 undefined on input line 168.
-
 File: figure/not_found_error_seeds.png Graphic file (type bmp)
 <figure/not_found_error_seeds.png>
-
-LaTeX Warning: Citation `SAITO2011' on page 2 undefined on input line 174.
-
-
-LaTeX Warning: Citation `SAITO2011' on page 2 undefined on input line 174.
-
 
 Overfull \hbox (15.65pt too wide) in paragraph at lines 164--178
  [][][][] 
  []
 
-[2]
-
-LaTeX Warning: Citation `Yamaguchi2014' on page 3 undefined on input line 204.
-
-[3]
-
-LaTeX Warning: Citation `Struss1989' on page 4 undefined on input line 257.
-
-
-LaTeX Warning: Citation `Yamaguchi2014' on page 4 undefined on input line 258.
-
-
-LaTeX Warning: Citation `Kitamura1999' on page 4 undefined on input line 259.
-
-[4]
+[2] [3] [4]
 File: figure/fault_diagnosis_flow.png Graphic file (type bmp)
 <figure/fault_diagnosis_flow.png>
 [5]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 365.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 372.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10.95> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 365.
-File: figure/simple_sat.png Graphic file (type bmp)
-<figure/simple_sat.png>
-[6]
-
-LaTeX Warning: Citation `Yamaguchi2014' on page 7 undefined on input line 388.
-
-[7]
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 372.
+File: figure/satellite_diagram.PNG Graphic file (type bmp)
+<figure/satellite_diagram.PNG>
+[6] [7]
 File: figure/port_definition.png Graphic file (type bmp)
 <figure/port_definition.png>
 File: figure/compo_port.png Graphic file (type bmp)
 <figure/compo_port.png>
-[8] Excluding 'comment' comment. [9]
+[8] [9]
 File: figure/simple_sat_fault.png Graphic file (type bmp)
 <figure/simple_sat_fault.png>
 [10]
-Overfull \hbox (18.69543pt too wide) in paragraph at lines 597--599
-[]\JY1/mc/m/n/10.95 テレメトリポ ート ： \OT1/cmr/m/n/10.95 GS-MOBC(1)\JY1/mc/m/n/10.95 ， \OT1/cmr/m/n/10.95 MOBC-TOBC(3)\JY1/mc/m/n/10.95 ， \OT1/cmr/m/n/10.95 TOBC-TempSensor[]p(8)\JY1/mc/m/n/10.95 ， \OT1/cmr/m/n/10.95 TempSen-sor[]p-Prop(14) 
+Overfull \hbox (18.69543pt too wide) in paragraph at lines 572--574
+[]\JY1/mc/m/n/10.95 テレメトリリンク ： \OT1/cmr/m/n/10.95 GS-MOBC(1)\JY1/mc/m/n/10.95 ， \OT1/cmr/m/n/10.95 MOBC-TOBC(3)\JY1/mc/m/n/10.95 ， \OT1/cmr/m/n/10.95 TOBC-TempSensor[]p(8)\JY1/mc/m/n/10.95 ， \OT1/cmr/m/n/10.95 TempSen-sor[]p-Prop(14) 
  []
 
 File: figure/check_list_tel.png Graphic file (type bmp)
@@ -355,24 +297,25 @@ File: figure/check_list_tel.png Graphic file (type bmp)
 File: figure/check_list.png Graphic file (type bmp)
 <figure/check_list.png>
 
-Overfull \hbox (6.56711pt too wide) in paragraph at lines 645--646
+Overfull \hbox (6.56711pt too wide) in paragraph at lines 620--621
  [][] 
  []
 
-[12]
-No file paper.bbl.
-[13] (d:/Document/lab/Research/Thesis/paper/paper.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[12] (d:/Document/lab/Research/Thesis/paper/paper.bbl
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 7.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 19.
+LaTeX Font Info:    Kanji font shape `JY1/gt/m/it' undefined
+(Font)              No change on input line 25.
+) [13] (d:/Document/lab/Research/Thesis/paper/paper.aux) ) 
 Here is how much of TeX's memory you used:
- 2957 strings out of 479956
- 45176 string characters out of 5882783
- 349325 words of memory out of 5000000
- 20141 multiletter control sequences out of 15000+600000
- 549227 words of font info for 84 fonts, out of 8000000 for 9000
+ 2965 strings out of 479956
+ 45377 string characters out of 5882783
+ 349349 words of memory out of 5000000
+ 20146 multiletter control sequences out of 15000+600000
+ 549264 words of font info for 84 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 78i,13n,85p,297b,515s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,13n,85p,297b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on d:/Document/lab/Research/Thesis/paper/paper.dvi (13 pages, 42256 bytes).
+Output written on d:/Document/lab/Research/Thesis/paper/paper.dvi (13 pages, 45024 bytes).
