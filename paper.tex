@@ -11,6 +11,27 @@
 \usepackage{enumerate}
 % 上下に2.5cm、左右に20cmの余白を取る
 \usepackage[top=30mm, bottom=30mm, left=20mm, right=20mm]{geometry}
+\usepackage{listings} %,jlisting日本語のコメントアウトをする場合jlisting（もしくはjvlisting）が必要
+%ここからソースコードの表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
+
 
 \newif\iffigure
 %\figurefaulse
@@ -44,6 +65,7 @@ B4　西本 慎吾%\thanks{shingo_n@space.t.u-tokyo.ac.jp}
 %\lfoot[偶数ページの引数]{奇数ページの引数} %フッタ左側
 %\cfoot[偶数ページの引数]{奇数ページの引数} %フッタ中央
 %\rfoot[偶数ページの引数]{奇数ページの引数} %フッタ右側
+
 
 %abstは修正
 \begin{abstract}
@@ -214,6 +236,9 @@ Figure \ref{fig:error cause}のように知られている．
 非常に多くの故障候補が洗い出されることが想像できる．
 そのため，多くの故障候補の中から切り分けを行い，最終的な故障を
 特定するという作業は多くの知識と労力を必要とする作業である．
+%切り分け作業の難しさもだが，先行研究の事例を示し，故障候補の洗い出しに関しては
+%広く検討されていることを述べて，自分はこちら側をやるという方向で示せばいいのでは？
+
 %この時，未熟な運用者が原因特定のために誤ったコマンドを送信してしまうと，
 %衛星が死ぬ可能性も考えられる．このため，不具合分析を行う際には
 %そのコマンドが”安全”なのかという点が非常に重要となる．
@@ -231,6 +256,7 @@ Figure \ref{fig:error cause}のように知られている．
 そこで本研究では，経験が浅く，衛星に関する知識の乏しいエンジニアであっても
 不具合分析を実施できるような不具合分析支援の手法を提案する．
 この手法は下記の3つの要素で構成されている．
+%ここも少し変わるはず，そもそもモデル化できてないし
 \begin{itemize}
    \item 衛星内部のサブシステムや要素間の信号・電気・物理的相互作用のモデル化
    \item コマンド及びテレメトリによって情報が流れる経路のモデル化
@@ -238,16 +264,23 @@ Figure \ref{fig:error cause}のように知られている．
    の探索 %ここの言い回し
 \end{itemize}
    
+モデル化に関しては，今回は専
+
 まずは，簡易的な衛星のモデルに対してテストケースを考え，
 手法の有効性を検証し，有効であることが十分に示すことができれば，
 本研究室における衛星開発で部分的に実践し有効性を
 検証することを考えている．\\
 
 \section{先行研究調査}
+上述のように，不具合原因の洗い出し
+が網羅的にできていないこと，仮説の検証過程が専門家等の知識依存になっていること
+が不具合分析が不十分になっている原因の一つであった．%一つでないが
+これらの課題に対して，古くから故障診断システムの研究が盛んに行われており，
+特にモデルベースで行う手法に関して
+
 モデルを元に不具合診断を行うシステムの研究は古くから行われており，\cite{}
 正常時のコンポーネント間のつながりモデルに基づく不具合分析
-手法としてGDEが一般的である．
-推論時に扱うことのできる
+手法としてGDEが広く知られている．
 
 以下に比較結果を示す．
 \begin{table}[H]
@@ -266,6 +299,7 @@ Figure \ref{fig:error cause}のように知られている．
 %モデル複雑度が比較の指標になるのか？
 
 %ここのところまだ実装できて無くね？
+%かつ今のでできるのはON・OFF状態のアップデートだけな気がする．
 故障原因の切り分けをモデルのみを用いて行うことは（論文参照する），
 非現実的であり，実機の状態をフィードバックしながら対話的に
 切り分けを行っていくシステムのほうが現実的である．
@@ -279,11 +313,12 @@ Figure \ref{fig:error cause}のように知られている．
 \cite{Ontology1998}ことを書く．
 今回の手法で扱える範囲はどこまでで，試験時に役立てることができるのか，運用時
 だとどうなのかを示す．
+%でもこれ書くとこはモデルと手法のアルゴリズムを示してからのほうがいいか
 
 故障診断の全ての過程を対象の制約モデルを用いて行うことは，
 対象とするモデルの粒度に非常に高い忠実度が求められるため，複雑に物理現象が絡み合う
 衛星では難しい．
-むしろ，人間を対話的にサリンクすることによってシステムに求められるモデル化のコスト
+むしろ，人間を対話的にサポートすることによってシステムに求められるモデル化のコスト
 を下げつつ，不具合分析（故障診断）の過程を体系化し，経験の少ないエンジニアの支援が
 できると考えられる．
 
@@ -296,20 +331,21 @@ Figure \ref{fig:error cause}のように知られている．
 
 %以下で何を書くかをまとめる
 %まずは手法の説明
+%モデルの説明
 %コマンドを評価するための指標に関して
-%探索のアルゴリズムの具体的説明
-%実装結果．モデルの説明も必要になる（できればわかりやすい形で示したい）
+%探索のアルゴリズムの具体的説明？？？？
+%実装結果（できればわかりやすい形で示したい）
 %探索結果に関する考察
 %
 
-
+%この章は要らん
 \section{現在の状況}
 以下では，現在検討しているモデル化の手法に関して
 述べたあと，ケーススタディを用いて
 本手法による具体的な不具合分析の流れを説明する．
 
 %検証という言葉が正しくない．検証は立てた仮説の正しさを調べること
-\subsection{提案手法}
+\section{提案手法}
 以下のFigure \ref{fig:fault_diagnosis}に提案手法の不具合分析を行うフローを示す．
 図中において本研究の対象は，黄色に示しているところであり，
 不具合発生時のコマンド送信情報とテレメトリ情報
@@ -317,8 +353,8 @@ Figure \ref{fig:error cause}のように知られている．
 存在する故障箇所を検証するために必要な確認事項の洗い出しを行うことである．
 
 %故障診断の方がいいかもしれない
-\subsubsection{不具合分析アルゴリズム}
-%この図も修正する．番号が下のリストとかぶってややこしいから修正する．
+\subsection{不具合分析アルゴリズム}
+%この図も修正する．番号が下の箇条書きとかぶってややこしいから修正する．
 %検証結果のフィードバックもできるようにする予定.
 %ただし，OK　NGという簡単なフィードバック．パラメータ的な状態量は組み込めていない
 
@@ -339,7 +375,7 @@ Figure \ref{fig:error cause}のように知られている．
    %不具合を起こしたトリガーが何なのかは分からないが，コマンドによってもたらされたかの区別だけ必要？
    \item そのテレメトリに影響を与えるコマンドを送信してから，
    地上局がテレメトリを受信するまでの一連の経路を取得する．
-   \item 得られた経路内にあるコンポーネント，配線などを「故障候補」として登録する．（故障仮説の生成）
+   \item 得られた経路内にあるコンポーネントを「故障候補」として登録する．（故障仮説の生成）
    %その経路に対してコマンドパスとして入力があれば，入力の元となっているコンポーネントも故障候補に追加する．
    \item 他のテレメトリを確認することによって，棄却できる「故障候補」を棄却する．
    \item コマンドを送って得られるテレメトリ情報によって，
@@ -359,16 +395,202 @@ Figure \ref{fig:error cause}のように知られている．
 よって，軌道上での運用中でも同じような情報を用いて異常テレメトリから検証を行う際に
 支援が可能である．
 
-\subsubsection{コマンド評価指標}
-また，上記のアルゴリズムによって切り分けを行う際，
-人間が選択するための指標として以下のようなものを与えることにする．%変な言い方やな
+%ここにモデルの説明
+%モデル化に関しては今回研究のスコープから外す．モデルありきで行うことにした
+%jsonで定義した．Component_stateとCommand_typeのモデルの話も必要になる．
+%これらのモデルに基づいて，実装上ではどのようなオブジェクトが生成され
+%どのように関係しているのかを図示できたほうがいい
+\subsection{事前定義モデル}
+以上で述べた，不具合分析を行うために必要になるモデル
+に関して，具体的なテストケースをベースにして
+説明を行う．%言い回し
+
+\subsubsection{対象とするテストケース}
+今回，以下のFigure \ref{fig:simple_sat}の
+ような簡易衛星モデルを考え，モデル化の手法について
+述べる．\\
+また，矢印の色が情報の方向性を表しており
+赤がコマンドによる情報の伝達過程，
+青がテレメトリによる情報の伝達過程である．
+また，矢印の種類が情報として伝わる物
+を表しており，それぞれ以下のようになっている．
+\begin{itemize}
+   \item Signal：電気信号
+   \item Radio wave：電波
+   \item Power：電源
+   \item Heat：熱
+\end{itemize}
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=12.0cm]{figure/satellite_diagram.PNG}
+      \caption{簡易衛星モデル}
+      \label{fig:simple_sat}
+\end{figure}
+
+\subsubsection{各コンポーネント間の接続関係モデル}
+山口ら\cite{Yamaguchi2014}は人工衛星デバイスオントロジーとして，
+衛星内部でのコンポーネント間のつながりを表現するために「ポート」と「導管」%ここの説明を考える
+という概念を定義している．
+%論文ではもう少し詳細に説明する．
+この手法を参考にし，以下のTable \ref{tab:link_definition}のように
+リンクの定義を行い，Table \ref{tab:compo_link}のように各コンポーネント
+の属性としてリンクを定義した．\\
+リンクが持つ情報としては，リンク名，接続コンポーネント，ID，伝達物
+となっており，IDが各リンク固有の識別子としてリンクを参照する際に
+使用される．また，実際にコンポーネント間を接続している実態（配線やコネクタなど）を表現している
+のではなく，接続関係を概念的に表現したものにすぎない．
+%そのメリットは何なん？
+%ほんまはちゃんとポートと導管を作ったほうが良かったんかもしれん
+
+\newpage
+%キャプションとくっついているか確認
+%図新しいのに変える
+\begin{table}[H]
+   \centering
+   \caption{リンク定義} 
+   \label{tab:link_definition}
+\end{table} 
+\vspace{-2zh}
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=10cm]{figure/port_definition.png}
+\end{figure}
+次に，コンポーネントの定義を行う．以下のTable \ref{tab:compo_link}では，
+衛星システム全体として使用されている
+コンポーネントのリストを作成し，各コンポーネントの属性として
+コマンドリンクとテレメトリリンクを，上で定義したリンクのID
+を用いて定義している．
+ここで，コマンドリンクというのはコマンドによる情報の伝達で使用されるリンクであり，
+テレメトリリンクというのはテレメトリによる情報の伝達で使用されるリンクである．
+この時，属性として持つリンクはそのコンポーネントが出力元となる場合としている．
+
+%キャプションとくっついているか確認
+%図新しいのに変える
+%\newpage
+\begin{table}[H]
+   \centering
+   \caption{コンポーネント定義} 
+   \label{tab:compo_link}
+\end{table}
+\vspace{-2zh}
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=7cm]{figure/compo_port.png}
+\end{figure}
+
+以上の情報によって，衛星内部でコンポーネント全体がどのように接続しているか
+を定義することが可能になる．
+
+また，テレメトリに含める状態量として，以下の　ような各コンポーネントの状態を定義する．
+%Component_stateを記述する．これスクショの方が色ついててわかりやすいな
+\renewcommand{\lstlistingname}{Code}
+\begin{lstlisting}[caption=コンポーネント初期状態例,label=compo_sate]
+   {...
+   "AOBC":{"Active":true,
+		"PowerConsumption":{"value":2,"unit":"W"},
+		"Heat":"+",
+		"Function":{}},
+	"MIF":{"Active":true,
+		"PowerConsumption":{"value":1,"unit":"W"},
+		"Heat":"+",
+		"Function":{"Get_Data":{"Active":false,"target":"CAM","PowerConsumption":0}}},
+	"PCU":{"Active":true,
+		"PowerConsumption":{"value":1,"unit":"W"},
+		"Heat":"+",
+      "Function":{}},
+      ...}
+\end{lstlisting}
+%どっちにするか選択
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=5.0cm]{figure/Component_state.png}
+      \caption{コンポーネント初期状態例}
+      \label{fig:Compo_state}
+\end{figure}
+
+本研究では簡単のため状態量として扱うものは，各コンポーネントの電源状態，
+それに伴う電力消費，姿勢変化及び，熱の発生としている．
+また，電源ON/OFF状態以外にも機能を持つコンポーネントは
+Functionという概念を追加し，
+%将来的にはパラメータを含む状態量も扱えるように拡張していく予定である．
+
+\subsubsection{コマンド・テレメトリの情報がコンポーネント間を伝わる経路のモデル}
+次に，コマンド及びテレメトリがコンポーネント間を伝わる経路を探索するために
+必要なコマンド及びテレメトリの定義に関して述べる．
+まず，今回の衛星モデルにおいて使用できるテレメトリ及びコマンド
+を以下のTable \ref{tab:telemetry}，\ref{tab:command}に示す．
+
+%これ書くのクソだるいので図にして貼る．それかなんかCSVからできるやつ使う
+\begin{table}[H]
+   \centering
+   \caption{使用テレメトリ}
+   \label{tab:telemetry}
+      \begin{tabular}{cllcccc} \hline
+         ID&テレメトリ&経路\\ \hline
+         1&MOBCカウンター&MOBC$\rightarrow$GS\\
+         2&MOBC電流値&PCU$\rightarrow$MOBC$\rightarrow$GS\\
+         3&TOBCカウンター&TOBC$\rightarrow$MOBC$\rightarrow$GS\\
+         4&TOBC電流値&PCU$\rightarrow$MOBC$\rightarrow$GS\\
+         5&推進系温度&Prop$\rightarrow$TempSensor\_p$\rightarrow$TOBC$\rightarrow$MOBC$\rightarrow$GS\\
+         6&システム温度&Sys$\rightarrow$TempSensor\_sys$\rightarrow$TOBC$\rightarrow$MOBC$\rightarrow$GS\\
+         7&推進系ヒータ電流値&TOBC$\rightarrow$MOBC$\rightarrow$GS\\
+         8&システムヒータ電流値&TOBC$\rightarrow$MOBC$\rightarrow$GS\\
+         9&MOBCコマンドカウンター&MOBC$\rightarrow$GS\\
+         10&TOBCコマンドカウンター&TOBC$\rightarrow$MOBC$\rightarrow$GS\\ \hline
+      \end{tabular}
+\end{table}
+
+%ここも修正
+\begin{table}[H]
+   \centering
+   \caption{使用コマンド}
+   \label{tab:command}
+      \begin{tabular}{clllccc} \hline
+         ID&コマンド&経路&影響テレメトリID\\ \hline
+         1&MOBC電源ON&GS$\rightarrow$PCU$\rightarrow$MOBC&1,2,9\\
+         2&MOBCコマンドカウンターアップ&GS$\rightarrow$MOBC&9\\
+         3&TOBCコマンドカウンターアップ&GS$\rightarrow$MOBC$\rightarrow$TOBC&10\\
+         \multirow{2}{*}{4}&\multirow{2}{*}{推進系ヒータON}&GS$\rightarrow$MOBC$\rightarrow$PCU$\rightarrow$TOBC&\multirow{2}{*}{5,6,7}\\
+         &&$\rightarrow$Heater\_p$\rightarrow$(Prop,Sys)&\\
+         \multirow{2}{*}{5}&\multirow{2}{*}{システムヒータON}&GS$\rightarrow$MOBC$\rightarrow$PCU$\rightarrow$TOBC&\multirow{2}{*}{5,6,8}\\
+         &&$\rightarrow$Heater\_sys$\rightarrow$(Prop,Sys)&\\
+         6&TOBC電源ON&GS$\rightarrow$PCU$\rightarrow$TOBC&3,4,10\\ \hline
+      \end{tabular}
+\end{table}
+
+今回，Table \ref{tab:telemetry}に示すテレメトリの経路及び，Table \ref{tab:command}
+に示す経路と影響テレメトリIDに関しては事前に定義したものを使用した．
+
+%コマンドのタイプ（これも名前が不適切かもしれないが，）に関しても言及する．
+%故障箇所でなく，不具合原因という言葉にする？
+また，コマンドに対するテレメトリの応答を確認して不具合原因を絞り込んでいくためには
+コマンドがテレメトリ情報に変化をもたらす必要がある．
+
+
+実際の衛星ではコンポーネント数やコマンド・テレメトリの数
+が非常に多く，モデルが複雑化するため人によるモデル生成では
+作業量を考えると非現実的である．%いやそうでもないやろ．なんかこんなこと考えるのアホらしくなってきた．
+そのため，将来的にはこれらを必要最低限の情報から生成する手法に関しても
+検討していく．
+
+
+%リンクという言葉を急に出しているが，定義しているのはモデル化のところ
+\subsection{コマンド評価指標}
+次に，上記のアルゴリズムによって切り分けを行う際，
+人間がコマンドを選択するための指標に関して説明する．
+本研究の当初の目的は地上試験においての不具合分析支援であったが，本手法は軌道上での運用時でも
+活用できると考えられる．そのため，指標として運用時に有用となるものも提案し，
+使用状況に合わせて評価指標を切り替えることのできるフレームワークであることを示す．
 %指標に関する説明
 
 %衛星開発及び運用の経験がある方々へのヒアリングの結果，
-不具合分析を行う際の判断基準として，打つコマンドが「衛星にとって安全かどうか」
-という点が最重要である．%安全を確保しながら確実に切り分けを行えることが最重要と言いたい．
-そこで，提示する情報としてコマンドを打つことによって発生する，
-衛星内部の状態量の変化の大きさを定量的に示すことにする．
+不具合分析を行う際，衛星の安全を確保しながら確実に切り分けを行えることが
+重要である．そのためには，不具合発生時の状態をなるべく変えないように
+しながら徐々に切り分けを行っていくことが必要である．
+%安全を確保しながら確実に切り分けを行えることが最重要と言いたい．
+そこで，コマンドを打つことによって発生する
+衛星内部状態の変化の大きさを定量的に示し，そのコマンド
+の「負の効果」を表現することにする．\\
 
 %これを示す前にどんな衛星を元にしていて，どのような仮定をしているのかを示さないと意味がわからない．
 各コマンドを打つことによる状態量の変化として，以下のものが有用であると考えた．
@@ -380,8 +602,96 @@ Figure \ref{fig:error cause}のように知られている．
 
 また，運用時には
 可視時間が限られていて，そのパス中に不具合原因を究明しなければいけないような時間制約
-がある場合がある．その際には，効率的に切り分けが行えるコマンドである必要がある．
+がある場合がある．その際には，少ないコマンド数で効率的に原因特定が行えることが望ましい．
+そのため，以下のようにコマンドの「正の効果」を定義した．\\
+%どれだけのリンク（故障候補）を確認できるかという点
+コマンドの効果として重要なのは，コマンドを送ることによって
+確認できる故障候補がいくつ存在するかという点である．これは絞り込むことのできる
+能力を表していると言える．
+
+%リンクの定義．あとここで言っている正常はつながりが切れていないかという点であることを説明する．
+各コマンドによって情報が伝達し，テレメトリとして地上局に返ってくる経路によって，
+確認する対象のリンクまでに通る経路が異なる．%ココらへんの図が必要そう
+その各経路に存在するコンポーネントをつなぐリンクが正常である確率を
+$P(l = \text{normal})$，異常である確率を$P(l = \text{abnormal})$ %確率Pも斜体じゃないほうがええかも
+として与える．
+あるリンク$l_i$を確認するためには，リンク$l_i$が接続されているコンポーネントまでの経路
+が正常であることが必要である．このことから，「リンク$l_i$を確認することができる確率」
+がそれぞれの経路によって定まる．このことを以下のFigure \ref{fig:route}に示す例を用いて示す．\\
+\begin{figure}[H]
+   \centering
+      \begin{tabular}{c}
+         \begin{minipage}{0.50\hsize}
+         \centering
+         \includegraphics[height=8cm]{figure/route1.png}
+          %  \caption{}
+            \label{fig:route1}
+         \end{minipage}
+         \begin{minipage}{0.50\hsize}
+         \centering
+         \includegraphics[height=8cm]{figure/route2.png}
+         %\caption{}
+            \label{fig:route2}
+         \end{minipage}
+      \end{tabular} 
+      \caption{故障候補とそれを確認するための情報伝達経路の例}
+      \label{fig:route}
+\end{figure}
+以下では簡単のため，$P(l_i = \text{normal}) = P(l_i = \text{abnormal}) = 0.5$であるとし，
+太矢印になっている箇所が故障候補である．故障候補以外は正常であるとし，
+$P(l_i = \text{normal}) =1$である．
+この時，リンク7を確認するためにはノードAからノードFまでの経路(1,2,3,5)と，
+ノードDからノードAまでの経路(8,9)が正常である必要がある．%正常であるというより途切れていないという意味
+よって，経路1でリンク$7$を確認することができる確率は
+\begin{eqnarray}
+   P(l_{7} | \text{経路}1) &=& \prod_{i\in\text{経路1},i\neq 7} P(l_{i} = \text{normal})\\
+     &=& \left( \frac{1}{2}\right)^4
+\end{eqnarray}
+であることが分かる．
+同様に経路2に関してもリンク$7$を確認することができる確率は
+\begin{eqnarray}
+   P(l_{7} | \text{経路}2)  &=& \prod_{i\in\text{経路2},i\neq 7} P(l_{i} = \text{normal})\\
+   &=& \frac{1}{2}
+\end{eqnarray}
+となる．
+
+これを元に考えると，コマンドが通る経路（Rとする）によって確認できる
+故障可能性リンク数の期待値$E(\text{R})$は以下のように求まる．
+\begin{eqnarray}
+   E(\text{R})&=& \sum_{i\in \text{R}}P(l_i|\text{R})
+   = \sum_{i\in \text{R}}\prod_{j\in \text{R}, j\neq i} P(l_j=\text{normal})
+\end{eqnarray}
+これが，あるコマンドとそれによって影響を受けるテレメトリとで形成される
+経路を伝達する情報によって確認することのできるリンクの数を示している．
+つまり，コマンドが不具合原因を絞り込むことのできる能力を表していると言える．
+Figure \ref{fig:route}の経路1(R$_1$とする)と経路2(R$_2$とする)に関して計算してみると
+\begin{eqnarray}
+   E(\text{R}_1)  &=&  \\
+   E(\text{R}_2)  &=& 
+\end{eqnarray}
+
+理想的には通る経路のすべてを確認できることを考えると，
+通る経路の数と期待値の差が大きなコマンドは不確定性が大きいということになる．
+
+上で述べたように，切り分けを行っていくためには確実性が重要である．
+そこで，確実性を示す指標として以下のものを提案する．
+%ここらへん実装まで終わらして，ちゃんと有効であることを示せないと伝わらなさそう．
+%有効でなければやり直しやが．．
+\begin{eqnarray}
+     &=&  \\
+     &=& 
+\end{eqnarray}
+
+今回，故障候補の洗い出しは研究対象ではないため，簡単に不具合検知のきっかけとなった
+テレメトリが通る経路としており，それ以外の経路は正常であるという仮定をする．
+
+
+まず，コマンドを打つことによってどれだけの情報が得られるかという点から，
+そのコマンドを打つことによる情報量を考えた．
+
 その指標として，コマンドの能力を情報量（エントロピー）の定義から考えた．
+無理にエントロピーを使うのは間違っている気がする．情報量という考え方が妥当ではないか？
+確率分布になっていないことを考えると．
 
 コマンド$j$による切り分けの効果の指標を以下に定義する．\\
 コマンド$j$が確認できるリンクの集合を$\mathbb{L}_j$とする．
@@ -442,153 +752,7 @@ Figure \ref{fig:error cause}のように知られている．
    \item コマンドに影響を受けるテレメトリの関係
 \end{itemize}
 
-%モデル化に関しては今回研究のスコープから外す．モデルありきで行うことにした
-%jsonで定義した．Component_stateとCommand_typeのモデルの話も必要になる．
-%これらのモデルに基づいて，実装上ではどのようなオブジェクトが生成され
-%どのように関係しているのかを図示できたほうがいい
-\subsection{事前定義モデル}
-以上で述べた，不具合分析を行うために必要になるモデル
-に関して，具体的なテストケースをベースにして
-説明を行う．%言い回し
 
-\subsubsection{対象とするテストケース}
-今回，以下のFigure \ref{fig:simple_sat}の
-ような簡易衛星モデルを考え，モデル化の手法について
-述べる．\\
-また，矢印の色が情報の方向性を表しており
-赤がコマンドによる情報の伝達過程，
-青がテレメトリによる情報の伝達過程である．
-また，矢印の種類が情報として伝わる物
-を表しており，それぞれ以下のようになっている．
-\begin{itemize}
-   \item Signal：電気信号
-   \item Radio wave：電波
-   \item Power：電源
-   \item Heat：熱
-\end{itemize}
-\begin{figure}[H]
-   \centering
-      \includegraphics[height=11.0cm]{figure/satellite_diagram.PNG}
-      \caption{簡易衛星モデル}
-      \label{fig:simple_sat}
-\end{figure}
-
-\subsubsection{各コンポーネント間の接続関係の構築方法}
-山口ら\cite{Yamaguchi2014}は人工衛星デバイスオントロジーとして，
-衛星内部でのコンポーネント間のつながりを表現するために「ポート」，「導管」%ここの説明を考える
-という概念を定義している．
-この手法を参考にし，以下のTable \ref{tab:port_definition}
-リンクの定義を行い，Table \ref{tab:compo_port}のように各コンポーネント
-の属性としてリンクを定義した．\\
-リンクが持つ情報としては，リンク名，接続コンポーネント，ID，伝達物
-となっており，IDが各リンク固有の識別子としてリンクを参照する際に
-使用される．また，実際に接続している実態（配線やコネクタなど）を表現している
-のではなく，接続関係を概念的に表現したものにすぎない．
-%そのメリットは何なん？
-
-\newpage
-%キャプションとくっついているか確認
-%図新しいのに変える
-\begin{table}[H]
-   \centering
-   \caption{リンク定義} 
-   \label{tab:port_definition}
-\end{table} 
-\vspace{-2zh}
-\begin{figure}[H]
-   \centering
-      \includegraphics[height=10cm]{figure/port_definition.png}
-\end{figure}
-次に，コンポーネントの定義を行う．以下のTable \ref{tab:compo_port}では，
-衛星システム全体として使用されている
-コンポーネントのリストを作成し，各コンポーネントの属性として
-コマンドリンクとテレメトリリンクを，上で定義したリンクのID
-を用いて定義している．
-ここで，コマンドリンクというのはコマンドによる情報の伝達で使用されるリンクであり，
-テレメトリリンクというのはテレメトリによる情報の伝達で使用されるリンクである．
-この時，属性として持つリンクはそのコンポーネントが出力元となる場合としている．
-
-%キャプションとくっついているか確認
-%図新しいのに変える
-%\newpage
-\begin{table}[H]
-   \centering
-   \caption{コンポーネント定義} 
-   \label{tab:compo_port}
-\end{table}
-\vspace{-2zh}
-\begin{figure}[H]
-   \centering
-      \includegraphics[height=7cm]{figure/compo_port.png}
-\end{figure}
-
-以上の情報によって，衛星内部でコンポーネント全体がどのように接続しているか
-を定義することが可能になる．
-
-また，各コンポーネントが状態量を持ち
-その情報を元にテレメトリとして降りてくる情報を探索するために
-以下のようにコンポーネントの状態を初期状態をモデル化している．
-%Component_stateを記述する．
-
-%これいらんな多分
-また，コマンド及びテレメトリが伝達していく
-経路のモデルは，以上の情報からコンポーネントとリンクを順に
-辿っていくことによって構築することが可能であると考えている．
-
-\subsubsection{コマンド・テレメトリがコンポーネント間を伝わる経路の構築方法}
-次に，コマンド及びテレメトリがコンポーネント間を伝わる経路を探索するために
-必要なコマンド及びテレメトリの定義に関して述べる．
-まず，今回の衛星モデルにおいて使用できるテレメトリ及びコマンド
-を以下のTable \ref{tab:telemetry}，\ref{tab:command}に示す．
-
-%これ書くのクソだるいので図にして貼る．それかなんかCSVからできるやつ使う
-\begin{table}[H]
-   \centering
-   \caption{使用テレメトリ}
-   \label{tab:telemetry}
-      \begin{tabular}{cllcccc} \hline
-         ID&テレメトリ&経路\\ \hline
-         1&MOBCカウンター&MOBC$\rightarrow$GS\\
-         2&MOBC電流値&PCU$\rightarrow$MOBC$\rightarrow$GS\\
-         3&TOBCカウンター&TOBC$\rightarrow$MOBC$\rightarrow$GS\\
-         4&TOBC電流値&PCU$\rightarrow$MOBC$\rightarrow$GS\\
-         5&推進系温度&Prop$\rightarrow$TempSensor\_p$\rightarrow$TOBC$\rightarrow$MOBC$\rightarrow$GS\\
-         6&システム温度&Sys$\rightarrow$TempSensor\_sys$\rightarrow$TOBC$\rightarrow$MOBC$\rightarrow$GS\\
-         7&推進系ヒータ電流値&TOBC$\rightarrow$MOBC$\rightarrow$GS\\
-         8&システムヒータ電流値&TOBC$\rightarrow$MOBC$\rightarrow$GS\\
-         9&MOBCコマンドカウンター&MOBC$\rightarrow$GS\\
-         10&TOBCコマンドカウンター&TOBC$\rightarrow$MOBC$\rightarrow$GS\\ \hline
-      \end{tabular}
-\end{table}
-
-%ここも修正
-\begin{table}[H]
-   \centering
-   \caption{使用コマンド}
-   \label{tab:command}
-      \begin{tabular}{clllccc} \hline
-         ID&コマンド&経路&影響テレメトリID\\ \hline
-         1&MOBC電源ON&GS$\rightarrow$PCU$\rightarrow$MOBC&1,2,9\\
-         2&MOBCコマンドカウンターアップ&GS$\rightarrow$MOBC&9\\
-         3&TOBCコマンドカウンターアップ&GS$\rightarrow$MOBC$\rightarrow$TOBC&10\\
-         \multirow{2}{*}{4}&\multirow{2}{*}{推進系ヒータON}&GS$\rightarrow$MOBC$\rightarrow$PCU$\rightarrow$TOBC&\multirow{2}{*}{5,6,7}\\
-         &&$\rightarrow$Heater\_p$\rightarrow$(Prop,Sys)&\\
-         \multirow{2}{*}{5}&\multirow{2}{*}{システムヒータON}&GS$\rightarrow$MOBC$\rightarrow$PCU$\rightarrow$TOBC&\multirow{2}{*}{5,6,8}\\
-         &&$\rightarrow$Heater\_sys$\rightarrow$(Prop,Sys)&\\
-         6&TOBC電源ON&GS$\rightarrow$PCU$\rightarrow$TOBC&3,4,10\\ \hline
-      \end{tabular}
-\end{table}
-
-今回，Table \ref{tab:telemetry}に示すテレメトリの経路及び，Table \ref{tab:command}
-に示す経路と影響テレメトリIDに関しては事前に定義したものを使用した．
-
-%コマンドのタイプ（これも名前が不適切かもしれないが，）に関しても言及する．
-
-実際の衛星ではコンポーネント数やコマンド・テレメトリの数
-が非常に多く，モデルが複雑化するため人によるモデル生成では
-作業量を考えると非現実的である．%いやそうでもないやろ．なんかこんなこと考えるのアホらしくなってきた．
-そのため，将来的にはこれらを必要最低限の情報から生成する手法に関しても
-検討していく．
 
 %ここは実際の実装の中でのアルゴリズム？別に必要ないかな？
 %実践した結果を分かりやすく表示させるように変更して，その結果を例に説明するのがいいかもしれない
