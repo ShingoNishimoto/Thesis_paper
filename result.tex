@@ -1,0 +1,184 @@
+\expandafter\ifx\csname ifdraft\endcsname\relax
+\documentclass[11pt]{report}
+\usepackage{mypackage}
+\begin{document}
+\fi
+
+
+%ここは実践例
+\section{実践例}
+最後に，不具合分析の具体的な流れをみるために，以下のような故障を考え，
+不具合分析を行っていく．\\
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=13.0cm]{figure/fault_mode1.png}
+      \caption{故障モード(HTR\_Cam−Camera間)}
+      \label{fig:fault_mode1}
+\end{figure}
+Figure \ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ間
+接触不良が発生している場合を考える．
+この時，異常検知の際の不具合事象としては，
+\begin{itemize}
+   \item カメラヒータONコマンド(ID:15)を送信したのに，カメラ温度(ID:18)が上昇しない
+\end{itemize}
+という事象である．
+以下に，この事象に本手法を適用した例を示す．
+まず，Figure \ref{fig:tel_phase}に
+故障候補の決定及び，テレメトリ情報を用いた確認の段階を示す．
+故障候補の決定では，不具合事象を検知するきっかけとなったコマンドとテレメトリが形成する
+経路を探索し，targetTEL，targetCOMとして提示している．\\
+その後，時間変化するテレメトリ情報を用いて確認できる故障候補を提示し，
+返ってくるテレメトリが正常かどうかを入力させることで，切り分けを行っている．
+
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=5.0cm]{figure/Tel_phase.png}
+      \caption{テレメトリによる確認}
+      \label{fig:tel_phase}
+\end{figure}
+次に，Figure \ref{fig:ini_COM_phase}に示すのが，不具合発生時に送信していたコマンド情報から
+考えられるテレメトリの変化を用いて故障候補の確認を行う段階である．
+今回は，初期コマンドとしては異常検知の際に送ったコマンド(カメラヒータON)のみ
+を考えている．
+%もう少し説明が必要そう
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=7.0cm]{figure/initial_COM_phase.png}
+      \caption{初期コマンドを用いた確認}
+      \label{fig:ini_COM_phase}
+\end{figure}
+以下のFigure \ref{fig:COM_candidate}に示すのが，上記の流れを経て残った
+故障候補を確認できるコマンドを探索し，指標と共に提示した結果である．
+
+\begin{figure}[H]
+   \centering
+      \includegraphics[width=12.0cm]{figure/COM_candidate.png}
+      \caption{コマンドの選択肢表示}
+      \label{fig:COM_candidate}
+\end{figure}
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=8.0cm]{figure/COM_phase.png}
+      \caption{コマンドによる確認}
+      \label{fig:COM_phase}
+\end{figure}
+
+今回用意したコマンドとテレメトリだけでは，最終的な故障箇所の特定まで行うことができなかった．
+設計段階においてFMEA上に定義されている故障モードに対して適用することで，実際の
+試験時にその故障を特定するために必要なコマンドとテレメトリが定義されているかの確認作業にも
+本手法は利用できると考えられる．
+
+\begin{comment}
+まず，MOBCとTOBCからテレメトリは全て降ろされているものと仮定する．
+また，故障は「推進系ヒータの接着不良」であるとする．
+その時，テレメトリを通して確認できるのは
+\begin{itemize}
+   \item 「推進系ヒータON」コマンドを送ったのに，「推進系温度」テレメトリが変化しない．
+\end{itemize}
+という事象である．
+よって不具合検知は，この事象によって行われる．
+
+\subsection{不具合分析の例}
+この不具合において，「推進系ヒータON」コマンドを送信して推進系ヒータに熱が伝わるまでの経路
+と，推進系温度計が温度を読み取り「推進系温度」テレメトリとして地上局に伝わるまでの
+経路の中に故障箇所があると考えることができる．
+この経路を以下のFigure \ref{fig:simple_sat_fault}に太矢印で示している．
+%これにリンクID入れたら見やすいかも
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=9.0cm]{figure/simple_sat_fault.png}
+      \caption{故障箇所と不具合検知に関連するコマンドとテレメトリの経路}
+      \label{fig:simple_sat_fault}
+\end{figure}
+また，この経路内にあるコンポーネントに電源が入っているかどうかを確認するためには，
+そのコンポーネントに電源を供給するための経路が正常に作動しているかどうかを確認する
+必要がある．そこで
+\begin{itemize}
+   \item PCU$\rightarrow$MOBC(リンクID:4.2)，PCU$\rightarrow$TOBC(リンクID:5)
+\end{itemize}
+も検証を行う対象として考える．
+以上より，検証すべき経路は下記のようになる．
+\begin{itemize}
+   \item コンポーネント：GS，MOBC，TOBC，Heater\_p，Prop，TempSensor\_p
+   \item コマンドリンク：GS-MOBC(1)，MOBC-TOBC(3)，MOBC-PCU(4.2)，
+   PCU-TOBC(5)，\\TOBC-Heater\_p(6)，Heater\_p-Prop(10)
+   \item テレメトリリンク：GS-MOBC(1)，MOBC-TOBC(3)，TOBC-TempSensor\_p(8)，
+   TempSensor\_p-Prop(14)
+\end{itemize}
+以下，提案手法によるアルゴリズムによって不具合分析を行っていく．\\
+%この章長くて読みにくい
+まず，問題設定よりMOBC及びTOBCのテレメトリは全てダウンリンクされている状態に
+あるので，
+\begin{itemize}
+   \item テレメトリリンク:TOBC$\rightarrow$MOBC(3)，MOBC$\rightarrow$GS(1)
+   \item コマンドリンク：PCU$\rightarrow$MOBC(4.2)，PCU$\rightarrow$TOBC(5)
+\end{itemize}
+は問題ないことが確認できるため，故障可能性はなくなる．
+問題設定ではあるが，実際に「MOBC及びTOBCのテレメトリが全てダウンリンクされている」
+ことを確認するためには，「MOBCカウンター」
+「TOBCカウンター」を確認することが必要である．\\
+また不具合発生時，推進系ヒータが正常に作動しており，
+システム温度計からテレメトリを下ろす経路に問題がなければ，
+「システム温度」が上昇しているはずである．
+よって，テレメトリの確認によって検証できる経路として，
+コマンドリンク「TOBC-Heater\_p(6)」がある．
+以上より，不具合発生時から状態変化させずに確認すべき事項として以下
+が挙げられる．
+
+\begin{table}[H]
+   \centering
+   \caption{コマンドなしでの確認事項} 
+   \label{tab:check_list1}
+\end{table}
+\vspace{-2zh}
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=2.5cm]{figure/check_list_tel.png}
+\end{figure}
+衛星の状態を変化させること無く，テレメトリを確認するだけで
+検証できる箇所はこれ以上存在しないので，次にコマンドによる検証を行う．
+
+まず，コマンドパスとしてGSに近い箇所から順に確認を行う必要がある．
+MOBCへのコマンドが通っているかを確認するためには，「MOBCコマンドカウンターアップ」
+コマンドを送って，「MOBCコマンドカウンター」が変化していることを確認できれば良い．
+同様に考えると，以下の様に確認事項を洗い出すことができる．
+\begin{table}[H]
+   \centering
+   \caption{コマンド送信による確認事項} 
+   \label{tab:check_list2}
+\end{table}
+\vspace{-2zh}
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=2.6cm]{figure/check_list.png}
+\end{figure}
+以上の項目を確認した際，今回想定した故障モード（推進系ヒータの接着不良）
+では期待されるテレメトリデータの変化が起こるので，
+Table \ref{tab:check_list2}の確認対象パスの中にある故障可能性箇所は
+棄却され，
+故障可能性リンクとして残るのは
+\begin{itemize}
+   \item コマンドリンク：Heater\_p-Prop(10)
+\end{itemize}
+となる．
+
+%上のコマンドを送っても大丈夫なのかという議論はどうするのか？もしシステム温度が高いのに，その方法でたしかめてもいいものなのか？
+
+この経路上で考えうる故障モードと照らし合わせると，
+この切り分けによって残る故障モードは
+\begin{itemize}
+   \item 推進系ヒータの故障
+   \item 推進系ヒータの接着不良
+\end{itemize}
+となる．
+この時，
+「システム温度」の上昇によって「推進系ヒータの故障」の可能性は
+棄却できるため，最終的に「推進系ヒータの接着不良」
+が残り，
+実際の故障を棄却すること無く，絞り込みができていると言える．\\
+\end{comment}
+
+
+\expandafter\ifx\csname ifdraft\endcsname\relax
+  \end{document}
+\fi
