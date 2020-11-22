@@ -1,9 +1,10 @@
 \expandafter\ifx\csname ifdraft\endcsname\relax
-\documentclass[11pt]{report}
+\documentclass[11pt]{jsreport}
 \usepackage{mypackage}
 \begin{document}
 \fi
 
+\chapter{提案手法の実践と評価}
 
 %ここは実践例
 \section{実践例}
@@ -15,7 +16,7 @@
       \caption{故障モード(HTR\_Cam−Camera間)}
       \label{fig:fault_mode1}
 \end{figure}
-Figure \ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ間
+図\ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ間
 接触不良が発生している場合を考える．
 この時，異常検知の際の不具合事象としては，
 \begin{itemize}
@@ -23,7 +24,7 @@ Figure \ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ�
 \end{itemize}
 という事象である．
 以下に，この事象に本手法を適用した例を示す．
-まず，Figure \ref{fig:tel_phase}に
+まず，図\ref{fig:tel_phase}に
 故障候補の決定及び，テレメトリ情報を用いた確認の段階を示す．
 故障候補の決定では，不具合事象を検知するきっかけとなったコマンドとテレメトリが形成する
 経路を探索し，targetTEL，targetCOMとして提示している．\\
@@ -36,18 +37,19 @@ Figure \ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ�
       \caption{テレメトリによる確認}
       \label{fig:tel_phase}
 \end{figure}
-次に，Figure \ref{fig:ini_COM_phase}に示すのが，不具合発生時に送信していたコマンド情報から
+次に，図\ref{fig:ini_COM_phase}に示すのが，不具合発生時に送信していたコマンド情報から
 考えられるテレメトリの変化を用いて故障候補の確認を行う段階である．
 今回は，初期コマンドとしては異常検知の際に送ったコマンド(カメラヒータON)のみ
 を考えている．
 %もう少し説明が必要そう
+ここに検証しているリンクがどれに当たるのかに関して可視化できるようにしたい
 \begin{figure}[H]
    \centering
       \includegraphics[height=7.0cm]{figure/initial_COM_phase.png}
       \caption{初期コマンドを用いた確認}
       \label{fig:ini_COM_phase}
 \end{figure}
-以下のFigure \ref{fig:COM_candidate}に示すのが，上記の流れを経て残った
+以下の図\ref{fig:COM_candidate}に示すのが，上記の流れを経て残った
 故障候補を確認できるコマンドを探索し，指標と共に提示した結果である．
 
 \begin{figure}[H]
@@ -64,9 +66,16 @@ Figure \ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ�
 \end{figure}
 
 今回用意したコマンドとテレメトリだけでは，最終的な故障箇所の特定まで行うことができなかった．
-設計段階においてFMEA上に定義されている故障モードに対して適用することで，実際の
-試験時にその故障を特定するために必要なコマンドとテレメトリが定義されているかの確認作業にも
-本手法は利用できると考えられる．
+このことから，この衛星モデルが今回扱った故障「」が発生した際に故障特定を行える設計
+になっていないことが分かる．
+このように，本手法は単に故障箇所の特定を支援するだけでなく，設計の不備を洗い出すことにも
+利用できる．\\
+実ミッションでは，設計段階においてFMEA(Failure Mode and Effect Analysis)などを用いて，
+衛星システムに起こりうる故障モードを列挙し，それらの故障モードによる影響や，
+発見のしやすさなどをもとに設計へのフィードバックを行う．ここで洗い出された
+故障モードに対して本手法を適用することによって，それぞれの故障モードが発見可能であるか
+を確認することができる．
+
 
 \begin{comment}
 まず，MOBCとTOBCからテレメトリは全て降ろされているものと仮定する．
@@ -82,7 +91,7 @@ Figure \ref{fig:fault_mode1}に示すような，カメラヒータ−カメラ�
 この不具合において，「推進系ヒータON」コマンドを送信して推進系ヒータに熱が伝わるまでの経路
 と，推進系温度計が温度を読み取り「推進系温度」テレメトリとして地上局に伝わるまでの
 経路の中に故障箇所があると考えることができる．
-この経路を以下のFigure \ref{fig:simple_sat_fault}に太矢印で示している．
+この経路を以下の図\ref{fig:simple_sat_fault}に太矢印で示している．
 %これにリンクID入れたら見やすいかも
 \begin{figure}[H]
    \centering

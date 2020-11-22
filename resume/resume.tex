@@ -1,0 +1,168 @@
+\documentclass[11pt]{jsarticle}%article??
+
+\usepackage{../mypackage}
+%\usepackage[top=10truemm,bottom=10truemm,left=15truemm,right=15truemm]{geometry}
+\usepackage[]{multicol}
+
+\usepackage{titlesec}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+
+%
+% ######## measure #########
+% # mm = 1mm = 2.85pt      #
+% # cm = 10mm = 28.5pt     #
+% # in = 25.4mm = 72.27pt  #
+% # pt = 0.35mm = 1pt      #
+% # em = width of [M]      #
+% # ex = height of [x]     #
+% # zw = width of [Kanji]  #
+% # zh = height of [Kanji] #
+% ##########################
+% ##################### Portrait Setting #########################
+% # TOP = 1inch + ¥voffset + ¥topmargin + ¥headheight + ¥headsep #
+% #     = 1inch + 0pt + 4pt + 20pt + 18pt (default)              #
+% # BOTTOM = ¥paperheight - TOP -¥textheight                     #
+% ################################################################
+\setlength{\textheight}{\paperheight}   % 紙面縦幅を本文領域にする（BOTTOM=-TOP）
+\setlength{\topmargin}{-5.4truemm}       % 上の余白を30mm（=1inch+4.6mm）に
+\addtolength{\topmargin}{-\headheight}  % 
+\addtolength{\topmargin}{-\headsep}     % ヘッダの分だけ本文領域を移動させる
+\addtolength{\textheight}{-40truemm}    % 下の余白も30mm（BOTTOM=-TOPだから+TOP+30mm）
+% #################### Landscape Setting #######################
+% # LEFT = 1inch + ¥hoffset + ¥oddsidemargin (¥evensidemargin) #
+% #      = 1inch + 0pt + 0pt                                   #
+% # RIGHT = ¥paperwidth - LEFT - ¥textwidth                    #
+% ##############################################################
+\setlength{\textwidth}{\paperwidth}     % 紙面横幅を本文領域にする（RIGHT=-LEFT）
+\setlength{\oddsidemargin}{-15.4truemm}  % 左の余白を25mm(=1inch-0.4mm)に
+\setlength{\evensidemargin}{-15.4truemm} % 
+\addtolength{\textwidth}{-25truemm}     % 右の余白も25mm（RIGHT=-LEFT）
+%
+%
+
+\newif\iffigure
+%\figurefaulse
+\figuretrue
+%select show the figure or not
+
+\makeatletter
+\def\@cite#1{\textsuperscript{#1)}}
+\def\@biblabel#1{#1)}
+\makeatother
+
+\newcommand{\DATE}[3]{#1年#2月#3日} 
+\newcommand{\TheDay}{\DATE{2020}{12}{01}}
+\newcommand{\rHeader}{東京大学工学部航空宇宙工学科 中須賀・船瀬研究室}
+\newcommand{\lHeader}{令和2年度学士論文}
+
+%題名は重要そう
+\title{コマンドを用いた衛星の不具合分析支援に関する研究} 
+\date{} 
+\author{\TheDay 03-183005 西本 慎吾}
+
+%ヘッダの指定：
+\pagestyle{fancy}
+
+\begin{document}
+%2段組みにする
+\maketitle
+
+\thispagestyle{fancy}
+\lhead[\lHeader]{\lHeader} % ヘッダ左側
+%\chead[偶数ページの引数]{奇数ページの引数} %ヘッダ中央
+\rhead[\rHeader]{\rHeader} %ヘッダ右側
+%\lfoot[偶数ページの引数]{奇数ページの引数} %フッタ左側
+%\cfoot[偶数ページの引数]{奇数ページの引数} %フッタ中央
+%\rfoot[偶数ページの引数]{奇数ページの引数} %フッタ右側
+
+%\columnseprule=0.3mm
+
+\begin{abstract}
+  近年，大学や高専などの教育機関や，民間企業による超小型衛星の
+開発，およびそれを利用した事業の展開が盛んになっている
+一方で，超小型衛星の信頼性の低さが問題となっている．%修正
+ 超小型衛星の信頼性向上のためには，地上試験によって
+ 設計や製造過程での不良を事前に発見し，不具合の改修，対策を十分に
+ 行うことが重要である．
+ 衛星のように多くの機器が複雑に絡みあったシステムでは，
+ある機器の故障が他の機器へと波及するため，不具合事象から
+故障箇所の特定を行うことは非常に多くの知識と経験を必要とする． 
+ そこで，本研究ではコンポーネント間の接続関係モデル，情報
+ 伝達の経路モデルを用いて衛星の故障候補の
+ 検証方法（確認事項，打つべきコマンド）を人間の判断を支援する
+ 指標と共に提示することで，不具合分析を支援する手法を提案する．
+ 本手法では，簡易的な衛星モデルに対して実践することで
+ コマンドによる故障箇所の特定を効率的に行えること，設計の不備を発見
+することにつながることを確認した．
+%考える系は使わないほうがいい？
+\end{abstract}
+
+\begin{multicols}{2}
+  \section{序論}
+
+  \subsection{研究背景}
+  超小型衛星の信頼性の低さ，それを解決するためには設計製造過程に
+  おける信頼性を上げる必要がある．
+  設計・製造における不備が軌道上故障の多くを占めている現状がある，
+  解決するためには地上試験において，設計上の不備を発見し十分に改修しなけらばならない．
+
+  
+  \subsection{問題提起}
+  衛星の不具合分析の難しさが，地上試験での分析が不十分になっている原因．
+  これに対して，故障候補の洗い出しを網羅的に行う研究が盛んにおこなわれている．
+  一方で，故障候補を検証する段階において支援する研究はなされていない．
+
+  \subsection{本研究の目的}
+  故障仮説を生成してから，それを検証する段階での支援を行い，
+  大学などの宇宙開発の専門家でない人が十分に不具合分析を行うことができる手法を提案する．
+  必要な機能
+
+  それを達成するための研究要素
+
+  \section{モデルベース不具合分析手法の仕様}
+  \subsection{不具合分析アルゴリズム}
+  人と対話的に故障箇所を絞り込んでいく手法になっているため，人による
+  不具合分析の流れを示す．
+
+
+  \subsection{モデル}
+  コンポーネント間接続関係モデル．
+  情報伝達経路モデル
+  コマンドおよびテレメトリの機能モデル%これは違うかも
+
+  \subsection{評価指標の提案}
+  探索を行った結果を提示し，人間が選択する際に必要となる指標を
+  以下の2点に分けて示す．
+
+  衛星の生存性への副作用
+
+  故障候補切り分け能力の大きさ
+
+  地上試験と軌道上運用における使い分け
+
+  \section{提案手法による実践と評価}
+  \subsection{対象問題設定と実践結果}
+  実践例での対象故障．
+  複数の事例を確認して，どうだったかという結果も欲しい
+
+  \subsection{}
+
+  \section{結論}
+  \subsection{本研究で得られた成果}
+  
+  \subsection{今後の展望}
+  
+
+
+  
+  \bibliographystyle{junsrt} %plain, acm, alpha とか
+  \bibliography{../Ref} 
+
+
+\end{multicols}
+
+
+
+\end{document}

@@ -1,11 +1,14 @@
 \expandafter\ifx\csname ifdraft\endcsname\relax
-\documentclass[11pt]{report}
-
+\documentclass[11pt]{jsreport}
+\usepackage{comment}
 \begin{document}
 \fi
 
-%abstは修正
+
 \begin{abstract}
+  %英語の部分
+  \begin{comment}
+    
   To improve the reliability of nano-satellites, it is essential 
   to fix satellite failures which are generated in design phase and
   manufacturing phase.
@@ -20,23 +23,36 @@
   The effectiveness of the approach
   is proved by applying it to a simple satellite model and comparing 
   with results or process of identifying failure cause without the approach. \\
+\end{comment}
 
-  %要修正
+近年，大学や高専などの教育機関や，民間企業による超小型衛星の
+開発，およびそれを利用した事業の展開が盛んになっている．
+一方で，超小型衛星の信頼性の低さが問題となっている．%修正
  超小型衛星の信頼性向上のためには，地上試験によって
  設計や製造過程での不良を事前に発見し，不具合の改修，対策を十分に
  行うことが重要である．
- 一方で，不具合分析が個人の知識や経験に大きく依存するため，
+
+ 一方で，衛星のように多くの機器が複雑に絡みあったシステムでは，
+ある機器の故障が他の機器へと波及するため，不具合事象から
+故障個所の特定を行うことは非常に多くの知識と経験を必要とする．
+ そのため，宇宙開発を専門としない機関の
  経験が浅いエンジニアや衛星に関する知識の乏しいエンジニアが
- 異常事象から故障候補の洗い出し及び，故障箇所の特定
- を行うことは困難である．%言葉の定義
+ 不具合事象から故障候補を網羅的に
+ 洗い出し，故障箇所の特定を行うことは困難である．%言葉の定義
  %もしくは故障箇所
  
- 本研究では，コンポーネント間の接続関係モデル，情報
+ そこで，本研究ではコンポーネント間の接続関係モデル，情報
  伝達の経路モデルを用いて衛星の故障候補の
  検証方法（確認事項，打つべきコマンド）を人間の判断を支援する
  指標と共に提示することで，不具合分析を支援する手法を提案する．
+ 提案手法では，
+ を行う．
+ この手法によって，
+ ができると考えられる．%考える系は使わないほうがいい？
+
 また，簡易的な衛星モデルを用いて不具合分析を実践し，手法を用いない場合との
-比較によって有効性を検証する．
+比較によって有効性を検証した．
+%ここやばいな
 
 \end{abstract}
 
