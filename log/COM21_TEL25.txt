@@ -1,0 +1,38 @@
+targetTEL: [29, 9, 6.0, 2.0]
+targetCOM: [1, 4, 9, 29]
+TELtarget: [29, 9, 6.0, 2.0]
+Telemetry 1 ( MOBC_Counter ) can verify following links
+ [6, 2]
+
+Please check MOBC_Counter
+Input result(OK or NG)>>OK
+TELlink: [6, 2] were verified
+TELtarget: [29, 9]
+Telemetry 3 ( AOBC_Counter ) can verify following links
+ [9]
+
+Please check AOBC_Counter
+Input result(OK or NG)>>OK
+TELlink: [9] were verified
+
+ Check telemetries which influenced by initial Command state
+
+COMtarget: [1, 4, 9, 29] TELtarget: [29]
+Command 21 ( AOCS_ON ) & Telemetry 5 ( MOBC_COM_Counter ) can verify following links
+ COMlink: [4, 1] TELlink []
+Command 21 ( AOCS_ON ) & Telemetry 7 ( AOBC_COM_Counter ) can verify following links
+ COMlink: [9, 4, 1] TELlink []
+Command 21 ( AOCS_ON ) & Telemetry 11 ( AOBC_Current ) can verify following links
+ COMlink: [9, 4, 1] TELlink []
+
+Please check MOBC_COM_Counter
+Input result(OK or NG)>>OK
+COMlink: [4, 1] & TELlink: [] were verified
+
+Please check AOBC_COM_Counter
+Input result(OK or NG)>>OK
+COMlink: [9] & TELlink: [] were verified
+COMtarget: [29] TELtarget: [29]
+nothing can verify
+finish
+faulty COMlink: [29] faulty TELlink: [29]

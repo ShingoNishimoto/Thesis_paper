@@ -1,0 +1,76 @@
+targetTEL: [15, 11, 6.0, 2.0]
+targetCOM: [1, 4, 10]
+TELtarget: [15, 11, 6.0, 2.0]
+Telemetry 1 ( MOBC_Counter ) can verify following links
+ [6, 2]
+
+Please check MOBC_Counter
+Input result(OK or NG)>>OK
+TELlink: [6, 2] were verified
+
+ Check telemetries which influenced by initial Command state
+
+COMtarget: [1, 4, 10] TELtarget: [15, 11]
+Command 30 ( TAKE_PICTURE ) & Telemetry 5 ( MOBC_COM_Counter ) can verify following links
+ COMlink: [4, 1] TELlink []
+Command 30 ( TAKE_PICTURE ) & Telemetry 8 ( MIF_COM_Counter ) can verify following links
+ COMlink: [10, 4, 1] TELlink []
+Command 30 ( TAKE_PICTURE ) & Telemetry 27 ( M_DATA ) can verify following links
+ COMlink: [10, 4, 1] TELlink []
+Command 30 ( TAKE_PICTURE ) & Telemetry 28 ( CAM_Status ) can verify following links
+ COMlink: [10, 4, 1] TELlink []
+
+Please check MOBC_COM_Counter
+Input result(OK or NG)>>OK
+COMlink: [4, 1] & TELlink: [] were verified
+
+Please check MIF_COM_Counter
+Input result(OK or NG)>>NG
+
+Please check M_DATA
+Input result(OK or NG)>>NG
+
+Please check CAM_Status
+Input result(OK or NG)>>NG
+COMtarget: [10] TELtarget: [15, 11]
+COM 5 MOBC_OFF {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 2, 'Remaining Power': 4.8, 'Power consume by this COM': -2}
+COM 6 TOBC_OFF {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 2, 'Remaining Power': 4.8, 'Power consume by this COM': -1}
+COM 7 AOBC_OFF {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 2, 'Remaining Power': 4.8, 'Power consume by this COM': -2}
+COM 8 MIF_OFF {'candidate link number': 2, 'Check link number': 1.0, 'Mean Probability of check': 0.5, 'total_COM_number': 14.375} {'impact TEL num': 2, 'Remaining Power': 4.8, 'Power consume by this COM': -1}
+COM 13 HTR_PANEL_ON {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 8, 'Remaining Power': 4.8, 'Power consume by this COM': 2}
+COM 14 HTR_PROP_ON {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 6, 'Remaining Power': 4.8, 'Power consume by this COM': 1}
+COM 16 HTR_BAT_ON {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 5, 'Remaining Power': 4.8, 'Power consume by this COM': 1}
+COM 19 HTR_CAM_OFF {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 5, 'Remaining Power': 4.8, 'Power consume by this COM': -1}
+COM 21 AOCS_ON {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 4, 'Remaining Power': 4.8, 'Power consume by this COM': 2}
+COM 23 RW_START {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 4, 'Remaining Power': 5.3, 'Power consume by this COM': 0.5}
+COM 24 RW_STOP {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 2.25} {'impact TEL num': 4, 'Remaining Power': 4.3, 'Power consume by this COM': -0.5}
+COM 25 M_DATA_DOWN {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 0.5} {'impact TEL num': 3, 'Remaining Power': 4.3, 'Power consume by this COM': -0.5}
+Please select Command above(input ID) >>8
+Command 8 ( MIF_OFF ) & Telemetry 12 ( MIF_Current ) can verify following links
+ COMlink: [] TELlink [15, 11]
+
+Please check MIF_Current
+Input result(OK or NG)>>OK
+COMlink: [] & TELlink: [15, 11] were verified
+selected Command: [30, 8] remaining Command: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+COMtarget: [10] TELtarget: []
+COM 25 M_DATA_DOWN {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 1.0} {'impact TEL num': 4, 'Remaining Power': 4.3, 'Power consume by this COM': -0.5}
+Please select Command above(input ID) >>25
+Command 25 ( M_DATA_DOWN ) & Telemetry 8 ( MIF_COM_Counter ) can verify following links
+ COMlink: [10] TELlink []
+Command 25 ( M_DATA_DOWN ) & Telemetry 27 ( M_DATA ) can verify following links
+ COMlink: [10] TELlink []
+
+Please check MIF_COM_Counter
+Input result(OK or NG)>>NG
+
+Please check M_DATA
+Input result(OK or NG)>>NG
+
+Please check M_DATA
+Input result(OK or NG)>>NG
+selected Command: [30, 8, 25] remaining Command: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29]
+COMtarget: [10] TELtarget: []
+nothing can verify
+finish
+faulty COMlink: [10] faulty TELlink: []
