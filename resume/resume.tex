@@ -58,8 +58,8 @@
 \newcommand{\rHeader}{東京大学工学部航空宇宙工学科 中須賀・船瀬研究室}
 \newcommand{\lHeader}{令和2年度学士論文}
 
-%題名は重要そう
-\title{コマンド及びテレメトリを用いた衛星の不具合分析支援\\に関する研究} 
+%題名は重要そう　対話的とか入れたいかなあ
+\title{衛星の情報伝達経路モデルに基づく\\対話的不具合分析支援手法の提案} 
 \date{\TheDay} %これ日付と名前が横配置にできないかを考える
 \author{03-183005 西本 慎吾}
 
@@ -196,12 +196,13 @@
 \vspace{-1zh}
 本手法による
 不具合分析の流れを下図\ref{fig:fault_diagnosis_flow}に示す．
-人間と対話的に故障箇所の特定を行う仕様となっており，これにより
+本研究の対象は色付けているところであり，
+人間との対話的に故障箇所の特定を行う．これにより %うむ
 実機の情報をシステムにフィードバックしながら故障箇所を絞り込むことができるようになる．
 %ちょっと文字が小さい
 \begin{figure}[H]
   \centering
-    \includegraphics[height=5.8cm]{../figure/fault_diagnosis_flow.png}
+    \includegraphics[height=5.6cm]{../figure/fault_diagnosis_flow.png}
     \caption{本手法による不具合分析の流れ}
     \label{fig:fault_diagnosis_flow}
 \end{figure}
