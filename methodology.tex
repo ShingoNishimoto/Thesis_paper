@@ -130,7 +130,7 @@
 という概念を定義している．このオントロジーを用いて，山口ら\cite{Yamaguchi2014}
 は人工衛星デバイスオントロジーを構築している．
 %論文ではもう少し詳細に説明する．
-これらを参考にし，以下のTable \ref{tab:link_definition}のように
+これらを参考にし，以下の表\ref{tab:link_definition}のように
 接続関係を「リンク」として定義した．\\%違いを説明する必要があると思う
 リンクが持つ情報としては，リンク名，接続コンポーネント，ID，伝達物，
 そのリンクが正常に情報伝達を行う確率%言葉がむずい
@@ -154,7 +154,7 @@
       \includegraphics[height=11cm]{figure/link_definition.png}
 \end{figure}
 
-次に，コンポーネントの定義を行う．以下のTable \ref{tab:compo_link}では，
+次に，コンポーネントの定義を行う．以下の表\ref{tab:compo_link}では，
 衛星システム全体で使用されている
 コンポーネントのリストを作成し，各コンポーネントが接続している
 コマンドリンクとテレメトリリンクを，上で定義したリンクのID
@@ -201,10 +201,10 @@
 
 \subsection{コマンド・テレメトリの情報がコンポーネント間を伝わる経路のモデル}
 今回の衛星モデルにおけるテレメトリ及びコマンド
-を以下のTable \ref{tab:telemetry}，\ref{tab:command}に定義した．\\
+を以下の表\ref{tab:telemetry}，\ref{tab:command}に定義した．\\
 まず，本手法で用いるテレメトリの情報は，ID，テレメトリの名前，
 テレメトリが変化するためのトリガー，テレメトリの情報が衛星内部及び地上局まで伝わる
-経路である．
+経路である．%利用可かどうかは？
 今回は簡単のため，状態が変化するためのトリガー(TransitionTrigger)として，
 時間とコマンドのみを考えており，姿勢変化や軌道条件に依存した
 状態変化は考えないことにする．また，経路は通るリンクのIDを用いて
@@ -225,12 +225,12 @@
 \vspace{-2zh}
 \begin{figure}[H]
    \centering
-      \includegraphics[width=14.0cm]{figure/TEL.png}
+      \includegraphics[width=10.0cm]{figure/TEL.png}
 \end{figure}
 
 また，コマンドの情報としてID，コマンドの名前，コマンドによって影響を受ける
 テレメトリのID，コマンドの種別，コマンドによって情報が伝達する経路を与えている．
-今回，Table \ref{tab:telemetry}に示すテレメトリの経路及び，Table \ref{tab:command}
+今回，表\ref{tab:telemetry}に示すテレメトリの経路及び，表\ref{tab:command}
 に示す経路と影響テレメトリIDに関しては事前に定義したものを使用した．
 
 また，コマンドが持つ機能によって，いくつかの種別に分類することができる．
@@ -253,7 +253,7 @@ JAXA\cite{JAXA2020}は，衛星と衛星搭載機器の機能をモデル化し�
 \vspace{-2zh}
 \begin{figure}[H]
    \centering
-      \includegraphics[width=16.5cm]{figure/COM.png}
+      \includegraphics[width=13cm]{figure/COM.png}
 \end{figure}
 
 \begin{figure}[H]
@@ -356,7 +356,11 @@ JAXA\cite{JAXA2020}は，衛星と衛星搭載機器の機能をモデル化し�
 運用形態によっては，可視時間が非可視時間に比べて非常に短いこともあり，
 その際には一つの可視時間を逃すとミッション失敗につながるため，%言い方
 少ないコマンド数で効率的に不具合分析が行えることが重要である．\\
-%これ以下は変えたほうがいいかもしれないが，実装次第
+以下では，一つのコマンドの故障候補切り分け能力を表す指標と，
+ある故障候補がある際にどのコマンドから検証を始めれば最終的に少ないコマンド
+数で終えることができるかを表す指標の2点に関して述べる．
+
+\subsubsection{コマンドが確認できるリンクの数}
 効率的な不具合分析を行うためには，一度に確認できる故障候補の数が多いことが望ましい．
 コマンドによる検証を行う際，検証結果が正常テレメトリであれば，そのコマンドとテレメトリで形成される
 経路内にある故障候補は正常であると言えるため，故障候補の切り分けを行うことができる．
@@ -369,8 +373,6 @@ JAXA\cite{JAXA2020}は，衛星と衛星搭載機器の機能をモデル化し�
 故障候補をどれだけ確認できるかが重要になる．
 以下では，故障候補にあるリンクが正常に情報を伝達できる確率を用いて，
 コマンドが確認できるリンクの数を見積もる．
-
-\subsubsection{コマンドが確認できるリンクの数}
 %あとここで言っている正常はつながりが切れていないかという点であることを説明する？
 各コマンドによって情報が伝達し，テレメトリとして地上局に返ってくる経路によって，
 確認する対象のリンクまでに通る経路が異なる．
@@ -417,6 +419,8 @@ $P(l = \text{normal})$，異常である確率を$P(l = \text{abnormal})$ %確�
 が正常である必要がある．%正常の定義を明確に
 ここで，経路を表す記号をR，経路内にある故障候補リンクの集合を$\mathbb{F}$とすると，
 経路1を通る情報でリンク$1$を確認することができる確率は
+
+%これは同時確率でしかなくて，多分条件付確率ではない．というか同時確率でもない．Rjは事象ではない
 \begin{eqnarray}
    P(l_{1} | \text{R}_1) &=& \prod_{i\in\mathbb{F}_1,i\neq 1} P(l_{i} = \text{normal})\\
      &=& \left( \frac{1}{2}\right)^4
@@ -493,9 +497,9 @@ $\mathbb{R}_{k} = \{ \text{R}_{1}, \cdots , \text{R}_{j},\cdots ,\text{R}_{N_{k}
 故障候補の切り分け能力が高いコマンドであると言える．
 
 %本手法では簡単のために接続関係における故障のみを見ていると説明するべき
-\subsubsection{故障箇所特定のためにかかる総コマンド数の見積もり}
-次に，コマンドを選択する順番によって，故障箇所を特定するために打つ総コマンド数に変化が現れる
-ことを示し，総コマンド数の見積もりに関して述べる．
+\subsubsection{故障箇所特定のためにかかるコマンドの総数}
+次に，コマンドを選択する順番によって，故障箇所を特定するために打つコマンドの総数に変化が現れる
+ことを示し，コマンドの総数の見積もりに関して述べる．
 %単一故障だけを考えている．一つの故障を見つけた時点で終了するという過程での話．というより接続関係の話
 まず，上で定義した各リンクに関する正常確率を用いることによって，各径路ごとの
 平均確認可能性を以下の式(\ref{eq:P_R})のように求めることが可能になる．%名前を変えたほうがいいかも
@@ -514,17 +518,17 @@ $\mathbb{R}_{k} = \{ \text{R}_{1}, \cdots , \text{R}_{j},\cdots ,\text{R}_{N_{k}
 に関して述べる．
 テレメトリの結果が正常であるためには，そのテレメトリが通る経路内の
 リンクがすべて正常であればよいので，コマンドC$_k$を送った時に
-テレメトリT$_j$が正常または異常である確率は以下の式(\ref{eq:P_TEL_normal}，\ref{eq:P_TEL_abnormal})
+テレメトリT$_j$が正常または異常である確率は以下の式(\ref{eq:P_TEL_normal})，(\ref{eq:P_TEL_abnormal})
 のようになる．この時，経路の添え字とテレメトリのIDが対応している．
 \begin{eqnarray}
-   P(\text{T}_j = \text{normal}) &=& \prod_{i\in\mathbb{F_j}} P(l_i = \text{normal}) \label{eq:P_TEL_normal}\\
+   P(\text{T}_j = \text{normal}) &=& \prod_{i\in\mathbb{F}_j} P(l_i = \text{normal}) \label{eq:P_TEL_normal}\\
    P(\text{T}_j = \text{abnormal}) &=& 1 - P(\text{T}_j = \text{normal}) \label{eq:P_TEL_abnormal}
 \end{eqnarray}
 
 次に，上述したように「経路別確認可能性」が高い順でテレメトリを確認して行った場合に，
 各テレメトリの結果に応じて以降のテレメトリの正常（または異常）確率がどのように変化していくのかを示す．
-以下の図\ref{fig:TEL_result_process}に，上で示した例（図\ref{fig:route}）
-に関して各テレメトリの結果ごとに以降の結果を考えたものを示す．%言い方
+以下の図\ref{fig:TEL_result_process}では，上で示した例（図\ref{fig:route}）
+に関して各テレメトリの結果ごとに，それ以降の結果を場合分けしたものを示している．
 この時，図\ref{fig:route}の例では確認可能性は経路3，2，1の順に高いため，
 その順番に従って検証を行っている．
 \begin{figure}[H]
@@ -563,28 +567,33 @@ $\mathbb{R}_{k} = \{ \text{R}_{1}, \cdots , \text{R}_{j},\cdots ,\text{R}_{N_{k}
 そのため，一度テレメトリが異常値を示したものに関しては，以降のテレメトリも異常となる必要があるため
 図\ref{fig:TEL_result_process}のCase 3,5,6,7のような場合は考慮しない．\\
 これを踏まえて，Case 1,2,4,8のようになる確率は以下のように求まる．
-%こんなの要らん気がする．
+以下ではnomarlをN，abnormalをAと簡略化している．
 \begin{eqnarray}
-   P(\text{Case 1})  &=& P(\text{T}_3=\text{normal}\land\text{T}_2=\text{normal}\land
-   \text{T}_1=\text{normal}) \nonumber \\
+   P(\text{Case 1}) &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{N}\cap
+   \text{T}_1=\text{N}) \nonumber \\
+    &=& P(\text{T}_3=\text{N})
+   P(\text{T}_2=\text{N}|\text{T}_3=\text{N})
+   P(\text{T}_1=\text{N}|\text{T}_2=\text{N},\text{T}_3=\text{N}) \nonumber \\
+   &=& \frac{1}{2}\times\frac{1}{2}\times\frac{1}{8}\nonumber \\
      &=& \frac{1}{32} \\
-   P(\text{Case 2})  &=& P(\text{T}_3=\text{normal}\land\text{T}_2=\text{normal}\land
-   \text{T}_1=\text{abnormal}) \nonumber \\
+   P(\text{Case 2})  &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{N}\cap
+   \text{T}_1=\text{A}) \nonumber \\
       &=& \frac{7}{32} \\
-P(\text{Case 4})  &=& P(\text{T}_3=\text{normal}\land\text{T}_2=\text{abnormal}\land
-   \text{T}_1=\text{abnormal}) \nonumber \\
-   &=& P(\text{T}_3=\text{normal}\land\text{T}_2=\text{abnormal}) \nonumber\\
+P(\text{Case 4})  &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{A}\cap
+   \text{T}_1=\text{A}) \nonumber \\
+   &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{A}) \nonumber\\
       &=& \frac{1}{4} \\
-P(\text{Case 8})  &=& P(\text{T}_3=\text{abnormal}\land\text{T}_2=\text{abnormal}\land
-   \text{T}_1=\text{abnormal}) \nonumber \\
-   &=& P(\text{T}_3=\text{normal}) \nonumber\\
+P(\text{Case 8})  &=& P(\text{T}_3=\text{A}\cap\text{T}_2=\text{A}\cap
+   \text{T}_1=\text{A}) \nonumber \\
+   &=& P(\text{T}_3=\text{A}) \nonumber\\
       &=& \frac{1}{2} 
 \end{eqnarray}
 
-次に，図\ref{fig:TEL_result_process}のようになった場合それぞれに関して，
+次に，図\ref{fig:TEL_result_process}のように，各テレメトリの結果によって
+分岐したCaseそれぞれに関して，
 検証のためのコマンド探索に入る必要がある．この時，以前のコマンド送信による検証結果
 によって残る故障候補が変化するため，以下では，Case 2の場合を取り上げ，次のコマンドを選択する
-流れを述べる．\\
+流れに関して述べる．\\
 Case 2の場合に残る故障候補は以下の図\ref{fig:sucond_route}のようになる．
 問題設定として，図\ref{fig:route}で示したような3つの
 情報伝達経路を持つコマンド1と，下図\ref{fig:sucond_route}のような経路を
@@ -635,8 +644,8 @@ Case 2になる確率と合わせて考えると，Case 2-1またはCase 2-2に�
 
 以上のような検証のプロセスを，
 送信することで故障候補を切り分けられるコマンドが存在しなくなる，
-もしくは故障候補を特定するまで繰り返すことで，故障箇所の特定を行う．
-この流れをシステム上で先読みし，人間がコマンドを送信する前に最終的に打つコマンドの総数を
+もしくは故障箇所を特定するまで繰り返すことで，故障候補の切り分けを行う．
+この流れをシステム上で先に計算し，人間がコマンドを送信する前に最終的に打つコマンドの総数を
 見積もることが可能である．\\
 以下の図\ref{fig:all_process}に，今回説明のために使用した例(図\ref{fig:all_process})
 における検証の全プロセスを示す．
@@ -657,15 +666,16 @@ Case 2-1では故障候補をリンク3もしくは5に絞り込むことがで�
 ここでは簡単のため衛星システムがコマンド1と2のみを持つ場合を考え，コマンドの総数の期待値を算出
 する．
 以上で各Caseになる確率は算出しているので，それを用いると検証を行う際にコマンド1から選択した場合
-のコマンドの総数は以下の式()のようになる．ここで，$\mathbb{C}$は検証が終了した
+のコマンドの総数は以下の式(\ref{eq:N Ck})のようになる．ここで，$\mathbb{C}$は検証が終了した
 検証結果の集合であり，今回の例では$\mathbb{C} = \{\text{Case 1,Case 2-1, Case 2-2, Case 4, Case 8}\}$
 である．
 
+%これあっているのか不安になってきた．計算を見直す
 \begin{eqnarray}
    N(\text{C}_1) &=& \sum_{\text{Case }i\in\mathbb{C}} P(\text{Case }i) N_{\text{Case }i} \nonumber \\
      &=& \frac{1}{32}\times 1 + \frac{7}{64}\times 2 + \frac{7}{64}\times 2 + \frac{1}{4}\times 1 +
      \frac{1}{2}\times 1 \nonumber \\
-     &=& 1
+     &=& 1 \label{eq:N Ck}
 \end{eqnarray}
 
 同様にして，コマンド2から選択した場合も考えると，以下のように求まる．
@@ -677,6 +687,8 @@ Case 2-1では故障候補をリンク3もしくは5に絞り込むことがで�
 コマンドの総数の期待値が変化する．
 この期待値を「検証コマンド総数」と定義し，上述した指標と合わせて提示することで，どのコマンドから検証を開始することによって
 少ないコマンド数で検証を終えることが可能なのかを人間が直感的に認識することが可能になる．
+また検証プロセスにおいて，前検証結果に応じて検証コマンド総数は更新され，コマンド選択を行う際に
+どのコマンドを選択すれば最終的に早く検証を終えることができるのかを示すことができる．\\
 ここで，以上で示したコマンドの故障候補切り分け能力を示す指標を以下に再掲する．
 \begin{itemize}
    \item 平均確認可能性及び確認可能リンク数
