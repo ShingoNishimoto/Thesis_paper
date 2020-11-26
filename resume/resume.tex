@@ -205,7 +205,7 @@
 不具合分析の流れを下図\ref{fig:fault_diagnosis_flow}に示す．
 本研究の対象は色付けているところであり，
 人間と対話的に故障箇所の特定を行う．これにより %うむ
-実機の情報をシステムに反映しながら故障箇所を絞り込むことができるようになる．
+実機の情報をシステムに反映しながら故障箇所を絞り込むことができる．
 %ちょっと文字が小さい
 \begin{figure}[H]
   \centering
@@ -387,27 +387,30 @@ Caseに応じて最終的故障箇所を切り分けるまでのコマンドの�
     \label{fig:all_process}
 \end{figure}
 まず，各テレメトリが正常値を示すか否かは各リンクごとの正常確率を用いて以下の式(\ref{eq:P_TEL_normal}),
-(\ref{eq:P_TEL_abnormal})のように算出でき，これを元に図\ref{fig:all_process}の各Caseへの確率が求まる．
+(\ref{eq:P_TEL_abnormal})のように算出でき，これを元に図\ref{fig:all_process}の各Caseになる確率が求まる．
 ここで，$\text{T}_j$はIDが$j$のテレメトリを表しており，経路(R$_j$)の添え字と対応している．
 \begin{eqnarray}
   P(\text{T}_j = \text{normal}) &=& \prod_{i\in\mathbb{F}_j} P(l_i = \text{normal}) \label{eq:P_TEL_normal}\\
   P(\text{T}_j = \text{abnormal}) &=& 1 - P(\text{T}_j = \text{normal}) \label{eq:P_TEL_abnormal}
 \end{eqnarray}
 これを用いて以下の式(\ref{eq:N Ck})のように検証にかかるコマンド数の期待値が求められ，
+これを「検証コマンド総数」と定義する．
+ここで，$\mathbb{C}$は検証が終了した結果の各場合(Case)の集合である．%日本語が変かも
 %P(Case i)に関しては表式がめんどくさすぎるので書かない
 \begin{eqnarray}
   N(\text{C}_k) &=& \sum_{\text{Case }i\in\mathbb{C}} P(\text{Case }i) N_{\text{Case }i} \label{eq:N Ck}
 \end{eqnarray}
-これを「検証コマンド総数」と定義する．ここで，$\mathbb{C}$は検証が終了した結果の各場合(Case)の集合である．%日本語が変かも
 検証コマンド総数が少ないコマンドを選択することによって，全体的に
-かかるコマンドの数の期待値が小さい検証プロセスを選択することができる．
+かかるコマンドの数の期待値が小さい検証プロセスを選択することができ，時間制約を考えた場合に
+重要な指標であると言える．
 
 \subsubsection{評価指標の使い分け}
 %表にする方がいいか？
 以上で示した指標の使い分けに関して以下の表\ref{tab:indicator usage}に
-示す．地上試験時は電力と姿勢による制約はほぼ考えなくてよい．
+示す．地上試験時は電力と姿勢による制約はほぼ考えなくてよい．また，
 効率性を重視したい場合は$P_m(\text{C}_k)$，$E(\text{C}_k)$が高く，
 $N(\text{C}_k)$が小さいコマンドを選択すれば良い．
+%運用時のような時間制約を考える場合には$N(\text{C}_k)$を最優先するべき？
 
 \begin{table}[H]
   \centering %高，中，低の方がいいかも
@@ -420,23 +423,25 @@ $N(\text{C}_k)$が小さいコマンドを選択すれば良い．
       運用時&\textcolor{red}{高},低&\textcolor{red}{高},低&\textcolor{red}{中},低&\textcolor{red}{低},中&\textcolor{red}{低},中&\textcolor{red}{低},高\\ \hline
     \end{tabular}}
 \end{table}
+%運用時と地上試験で変わっている意図がわからない．
 
   \section{本手法による不具合分析の実践と評価}
   \vspace{-1zh}
   \subsection{問題設定}
   \vspace{-1zh}
-  以下のような簡易衛星モデルを用いて本手法による不具合分析を実践した．
+  以下の図\ref{fig:satellite}のような簡易衛星モデルを用いて本手法による不具合分析を実践した．
+  実践例として以下の2点の故障状態を仮定し，本手法による不具合分析を実践した．
+ \begin{itemize}
+   \item ヒータの接触不良
+   \item 温度計故障
+ \end{itemize}
   \begin{figure}[H]
     \centering
       \includegraphics[height=7.0cm]{../figure/satellite_diagram.png}
       \caption{簡易衛星モデル}
       \label{fig:satellite}
   \end{figure}
-  実践例として以下の2点の故障状態を仮定し，本手法による不具合分析を実践した．
- \begin{itemize}
-   \item ヒータの接触不良
-   \item 温度計故障
- \end{itemize}
+  
 
  %本当は指標の評価になるようなものを入れられるといい
   \vspace{-1zh}
@@ -444,6 +449,20 @@ $N(\text{C}_k)$が小さいコマンドを選択すれば良い．
   \vspace{-1zh}
   \subsubsection{ヒータの接触不良}
   \vspace{-1zh}
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=8.0cm]{../figure/COM14_TEL17_show_TEL_list.png}
+      \caption{テレメトリによる確認事項の提示}
+      \label{fig:TEL_list}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+      \includegraphics[width=8.0cm]{../figure/COM14_TEL17_initial_COM.png}
+      \caption{初期コマンドを用いた確認}
+      \label{fig:initial_COM}
+  \end{figure}
   %この図を可視化したものにできると嬉しい
  \begin{figure}[H]
    \centering
