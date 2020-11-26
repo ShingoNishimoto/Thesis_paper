@@ -14,14 +14,14 @@
 \makeatother
 
 \newcommand{\DATE}[3]{#1年#2月#3日} %month, day, year
-\newcommand{\TheDay}{\DATE{2020}{11}{17}}
+\newcommand{\TheDay}{\DATE{2020}{11}{30}}
 %ヘッダとかもなくてもいいかも
 %\newcommand{\Header}{中須賀・船瀬研究室}
 
 \title{卒業論文} %最終発表
 \date{\TheDay}
 \author{
-03-183005\\西本 慎吾%\thanks{shingo_n@space.t.u-tokyo.ac.jp}
+03-183005　西本 慎吾%\thanks{shingo_n@space.t.u-tokyo.ac.jp}
 }
 
 %ヘッダの指定：
@@ -31,7 +31,7 @@
 \newcommand{\ifdraft}{true}
 
 \begin{document}
-\maketitle
+%\maketitle
 %\thispagestyle{fancy}
 %\lhead[\Header]{\Header} % ヘッダ左側
 %\chead[偶数ページの引数]{奇数ページの引数} %ヘッダ中央
@@ -39,6 +39,19 @@
 %\lfoot[偶数ページの引数]{奇数ページの引数} %フッタ左側
 %\cfoot[偶数ページの引数]{奇数ページの引数} %フッタ中央
 %\rfoot[偶数ページの引数]{奇数ページの引数} %フッタ右側
+\begin{titlepage}
+  \begin{center}
+  \vspace*{10zh}
+  {\LARGE 東京大学工学部航空宇宙工学科\\令和2年度学士論文}
+  \vspace{2zh} \\
+  {\huge 衛星内の情報伝達経路モデルに基づく\\不具合分析支援に関する研究}
+   \vspace{15zh} \\
+   {\Large 03-183005　西本 慎吾}\\
+   {\Large 指導教員 船瀬 龍 准教授}\\
+   {\Large \TheDay}
+  \vspace{12pt} \\
+  \end{center}
+\end{titlepage}
 
 
 %あとでincludeからinputに戻すかな
@@ -48,6 +61,13 @@
 \include{result.tex}
 \include{discussion.tex}
 \include{conclusion.tex}
+
+\input{abtract.tex}
+\input{introduction.tex}
+\input{methodology.tex}
+\input{result.tex}
+\input{discussion.tex}
+\input{conclusion.tex}
 
 %以下で何を書くかをまとめる
 %まずは手法の説明

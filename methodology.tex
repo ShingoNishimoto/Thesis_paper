@@ -4,8 +4,7 @@
 \begin{document}
 \fi
 
-%ここも変更かな
-\chapter{モデルベース不具合分析手法の仕様}
+\chapter{情報伝達経路モデルに基づく対話的不具合分析手法の仕様}
 
 \section{概要}
 本研究では，衛星の不具合分析において故障仮説の検証を支援するシステムを提案する．
@@ -17,14 +16,14 @@
 判断の支援を行う．\\
 %ここに自分の意志が入っているのはおかしい？
 また，不具合原因特定の全ての過程を衛星の制約モデルを用いて行うためには，%制約モデル？
-モデルに対して非常に高い忠実度が求められる．衛星は複雑に物理現象が絡み合う
+非常に忠実度の高いモデルが必要である．衛星は複雑に物理現象が絡み合う
 ため，物理法則に基づいた事象が各コンポーネント間を伝搬する様子を表現することは
 モデル化のコストが非常に大きい．
 むしろ，人間を対話的に支援することによってモデルに求められる忠実度のレベル
 を下げつつ不具合分析の過程を体系化することができ，経験の少ないエンジニアの支援が
 できる．そのため，システムが提示した選択肢を用いて人間が実機での検証を行い，
-その結果をシステムにフィードバックすることで，対話的に故障箇所の特定を行っていく
-構成になっている．\\
+その検証結果をシステムに反映することで，対話的に故障箇所の特定を行っていく
+構成となっている．\\
 %ここに手法の簡単な構成を入れたほうがいいのか？提案手法の中にまとめてしまうのか？
 
 \section{不具合分析アルゴリズム}
@@ -568,25 +567,25 @@ $\mathbb{R}_{k} = \{ \text{R}_{1}, \cdots , \text{R}_{j},\cdots ,\text{R}_{N_{k}
 そのため，一度テレメトリが異常値を示したものに関しては，以降のテレメトリも異常となる必要があるため
 図\ref{fig:TEL_result_process}のCase 3,5,6,7のような場合は考慮しない．\\
 これを踏まえて，Case 1,2,4,8のようになる確率は以下のように求まる．
-以下ではnomarlをN，abnormalをAと簡略化している．
+以下ではnomarlをn，abnormalをaと略記している．
 \begin{eqnarray}
-   P(\text{Case 1}) &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{N}\cap
-   \text{T}_1=\text{N}) \nonumber \\
-    &=& P(\text{T}_3=\text{N})
-   P(\text{T}_2=\text{N}|\text{T}_3=\text{N})
-   P(\text{T}_1=\text{N}|\text{T}_2=\text{N},\text{T}_3=\text{N}) \nonumber \\
+   P(\text{Case 1}) &=& P(\text{T}_3=\text{n}\cap\text{T}_2=\text{n}\cap
+   \text{T}_1=\text{n}) \nonumber \\
+    &=& P(\text{T}_3=\text{n})
+   P(\text{T}_2=\text{n}|\text{T}_3=\text{n})
+   P(\text{T}_1=\text{n}|\text{T}_2=\text{n},\text{T}_3=\text{n}) \nonumber \\
    &=& \frac{1}{2}\times\frac{1}{2}\times\frac{1}{8}\nonumber \\
      &=& \frac{1}{32} \\
-   P(\text{Case 2})  &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{N}\cap
-   \text{T}_1=\text{A}) \nonumber \\
+   P(\text{Case 2})  &=& P(\text{T}_3=\text{n}\cap\text{T}_2=\text{n}\cap
+   \text{T}_1=\text{a}) \nonumber \\
       &=& \frac{7}{32} \\
-P(\text{Case 4})  &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{A}\cap
-   \text{T}_1=\text{A}) \nonumber \\
-   &=& P(\text{T}_3=\text{N}\cap\text{T}_2=\text{A}) \nonumber\\
+P(\text{Case 4})  &=& P(\text{T}_3=\text{n}\cap\text{T}_2=\text{a}\cap
+   \text{T}_1=\text{a}) \nonumber \\
+   &=& P(\text{T}_3=\text{n}\cap\text{T}_2=\text{a}) \nonumber\\
       &=& \frac{1}{4} \\
-P(\text{Case 8})  &=& P(\text{T}_3=\text{A}\cap\text{T}_2=\text{A}\cap
-   \text{T}_1=\text{A}) \nonumber \\
-   &=& P(\text{T}_3=\text{A}) \nonumber\\
+P(\text{Case 8})  &=& P(\text{T}_3=\text{a}\cap\text{T}_2=\text{a}\cap
+   \text{T}_1=\text{a}) \nonumber \\
+   &=& P(\text{T}_3=\text{a}) \nonumber\\
       &=& \frac{1}{2} 
 \end{eqnarray}
 
@@ -822,6 +821,8 @@ $\mathbb{R}_k$に含まれる故障候補の集合を，
 そのような時には，リスクを大きく取りつつ効果の大きなコマンドを選択する必要がある．
 よって，運用時は上で示した全ての指標を元に，リスクと効率のトレードオフを考えながら
 コマンドの選択を行う必要がある．
+
+
 
 \expandafter\ifx\csname ifdraft\endcsname\relax
   \end{document}
