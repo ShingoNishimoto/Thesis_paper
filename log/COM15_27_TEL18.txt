@@ -1,0 +1,70 @@
+targetTEL: [43, 27, 8.0, 6.0, 2.0]
+targetCOM: [1, 4, 8, 23, 35]
+TELtarget: [43, 27, 8.0, 6.0, 2.0]
+Telemetry 1 ( MOBC_Counter ) can verify following links
+ [6, 2]
+
+Please check MOBC_Counter
+Input result(OK or NG)>>OK
+TELlink: [6, 2] were verified
+TELtarget: [43, 27, 8.0]
+Telemetry 2 ( TOBC_Counter ) can verify following links
+ [8]
+
+Please check TOBC_Counter
+Input result(OK or NG)>>OK
+TELlink: [8] were verified
+
+ Check telemetries which influenced by initial Command state
+
+COMtarget: [1, 4, 8, 23, 35] TELtarget: [43, 27]
+Command 15 ( HTR_CAM_ON ) & Telemetry 5 ( MOBC_COM_Counter ) can verify following links
+ COMlink: [4, 1] TELlink []
+Command 15 ( HTR_CAM_ON ) & Telemetry 6 ( TOBC_COM_Counter ) can verify following links
+ COMlink: [8, 4, 1] TELlink []
+Command 15 ( HTR_CAM_ON ) & Telemetry 10 ( TOBC_Current ) can verify following links
+ COMlink: [8, 4, 1] TELlink []
+Command 15 ( HTR_CAM_ON ) & Telemetry 22 ( HTR_CAM_Current ) can verify following links
+ COMlink: [23, 8, 4, 1] TELlink []
+
+Please check MOBC_COM_Counter
+Input result(OK or NG)>>OK              
+COMlink: [4, 1] & TELlink: [] were verified
+
+Please check TOBC_COM_Counter
+Input result(OK or NG)>>OK
+COMlink: [8] & TELlink: [] were verified
+
+Please check HTR_CAM_Current
+Input result(OK or NG)>>OK
+COMlink: [23] & TELlink: [] were verified
+COMtarget: [35] TELtarget: [43, 27]
+COMtarget: [35] TELtarget: [43, 27]
+COM 13 HTR_PANEL_ON 
+         {'candidate link number': 2, 'Check link number': 1.0, 'Mean Probability of check': 0.5, 'total_COM_number': 2.0} 
+         {'impact TEL num': 8, 'Remaining Power': 4.8, 'Power consume by this COM': 2, 'Attitude': 'Keep'}
+COM 19 HTR_CAM_OFF 
+         {'candidate link number': 3, 'Check link number': 0.75, 'Mean Probability of check': 0.25, 'total_COM_number': 1.875} 
+         {'impact TEL num': 5, 'Remaining Power': 4.8, 'Power consume by this COM': -1, 'Attitude': 'Keep'}
+Please select Command above(input ID) >>13
+Command 13 ( HTR_PANEL_ON ) & Telemetry 18 ( CAM_Temp ) can verify following links
+ COMlink: [] TELlink [43, 27]
+
+Please check CAM_Temp
+Input result(OK or NG)>>NG
+selected Command: [15, 27, 13] remaining Command: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30]
+COMtarget: [35] TELtarget: [43, 27]
+COM 19 HTR_CAM_OFF 
+         {'candidate link number': 3, 'Check link number': 0.75, 'Mean Probability of check': 0.25, 'total_COM_number': 1.0}
+         {'impact TEL num': 5, 'Remaining Power': 4.8, 'Power consume by this COM': -1, 'Attitude': 'Keep'}
+Please select Command above(input ID) >>19
+Command 19 ( HTR_CAM_OFF ) & Telemetry 18 ( CAM_Temp ) can verify following links
+ COMlink: [35] TELlink [43, 27]
+
+Please check CAM_Temp
+Input result(OK or NG)>>NG
+selected Command: [15, 27, 13, 19] remaining Command: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30]
+COMtarget: [35] TELtarget: [43, 27]
+nothing can verify
+finish
+faulty COMlink: [35] faulty TELlink: [43, 27]

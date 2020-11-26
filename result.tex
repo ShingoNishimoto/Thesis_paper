@@ -17,7 +17,7 @@
 
 \section{実践例}
 
-%申し少しsectionわけを考える．
+%もう少しsectionわけの名前を考える．
 \subsection{ヒータ接触不良の特定}
 まず，以下の図\ref{fig:fault_mode1}のような故障を考え，
 不具合分析を行っていく．\\
@@ -29,6 +29,7 @@
       \label{fig:fault_mode1}
 \end{figure}
 
+%問題設定の与え方として，各コンポーネントの状態はどのようになっているかを示したほうが良くないか？
 図\ref{fig:fault_mode1}に示すような
 推進系ヒータ‐推進系間でのヒータ接触不良が発生している場合を考える．
 この時，異常検知の際の不具合事象としては，
@@ -69,11 +70,11 @@
 
 最後に，以下の図\ref{fig:COM_candidate}に示すのが，上記の流れを経て残った
 故障候補を確認できるコマンドを探索し，指標と共に提示した結果である．
-残った故障候補はコマンドリンク:32，テレメトリリンク:40,24であり，それぞれ
+残った故障候補は，
 \begin{itemize}
-   \item[32：]推進系ヒータ‐推進系間
-   \item[40：]推進系‐推進系温度計間
-   \item[24：]推進系温度計‐TOBC間   
+   \item コマンドリンク32:推進系ヒータ‐推進系間
+   \item テレメトリリンク40:推進系‐推進系温度計間
+   \item テレメトリリンク24:推進系温度計‐TOBC間   
 \end{itemize}
 である．
 この時，探索結果として表示されたのはコマンド13(パネルヒータON)のみであり，このコマンドに関する指標が
@@ -154,17 +155,36 @@ Attitudeに関しては，姿勢変化を起こす場合は"Change"，起こさ�
 %別で特定できなかった事例を取り上げて設計へのフィードバック．
 %評価指標の優先順位を考えることでどのように検証結果が変化するのかを考察する．
 \subsection{温度計故障に関する検証}%???
-次に，以下の図\ref{fig:fault_mode2}に示すような故障を考え検証を行った．
-温度計故障（断線）
+次に，以下の図\ref{fig:fault_mode2}に示すような
+温度計故障（断線）を考え検証を行った例に関して述べる．
+この時，異常検知の際の不具合事象としては，上の事例と同じく
+\begin{itemize}
+   \item カメラヒータONコマンド(ID:15)を送信したのに，カメラ温度(ID:18)が上昇しない
+\end{itemize}
+という事象である．
+テレメトリの確認や，初期コマンド状態からの確認情報の提示の流れは先ほどの例と
+同様で，この時点で残った故障候補が以下のようになった．
+\begin{itemize}
+   \item コマンドリンク35：カメラヒータ‐カメラ間
+   \item テレメトリリンク43：カメラ‐カメラ温度計間
+   \item テレメトリリンク27：カメラ温度計‐TOBC間
+\end{itemize}
 \begin{figure}[H]
    \centering
       \includegraphics[height=13.0cm]{figure/fault_mode2.png}
       \caption{故障箇所：リンク27(カメラ温度計-TOBC間)の時の故障候補}
       \label{fig:fault_mode2}
 \end{figure}
-やった結果どうなったかを示す．
+この時，システムによって洗い出された検証用のコマンドは以下の図\ref{fig:mode2_COM_candidate}
+のようになり，それぞれの指標の値を見ると
 
 
+\begin{figure}[H]
+   \centering
+      \includegraphics[height=2cm]{figure/COM15_27_TEL18_COM_candidate.png}
+      \caption{検証用コマンド探索結果}
+      \label{fig:mode2_COM_candidate}
+\end{figure}
 
 
 
