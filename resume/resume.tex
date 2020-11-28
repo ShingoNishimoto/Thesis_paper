@@ -179,9 +179,9 @@
         網状故障解析\cite{Yamaguchi2014}&中&異常モード洗い出し%&高
         \\
         故障オントロジー\cite{Kitamura1999}&高&故障仮説生成%&高
-        \\
-        本手法&中%低かもしれない．接続関係しか見れていない
-        &故障箇所特定支援%&中
+        %\\
+        %本手法&中%低かもしれない．接続関係しか見れていない
+        %&故障箇所特定支援%&中
         \\ \hline %本手法は入れないほうがいいのか．．
      \end{tabular}}
 \end{table}
@@ -204,22 +204,30 @@
 \vspace{-1zh}
 \subsection{手法の概要}
 \vspace{-1zh}
-上述した機能を実現するために，本手法は以下の3点から構成されている．
+上述した機能を実現するために，本手法は以下の2点から構成されている．
 \begin{itemize} %ここの順番と以下の順番を一致させる
   \item 衛星内部機器の接続関係モデル及び情報伝達経路モデル
-  \item 故障箇所の特定を行うために必要なコマンド及びテレメトリの探索アルゴリズム%これいるのか？説明する価値があるのか？
+  %\item 故障箇所の特定を行うために必要なコマンド及びテレメトリの探索アルゴリズム%これいるのか？説明する価値があるのか？
   \item コマンドの安全性及び，故障候補切り分け能力を示す指標
 \end{itemize}
-本手法を用いた不具合分析の流れを下図\ref{fig:fault_diagnosis_flow}に示す．
-本研究の対象は色付けているところであり，%うむ
-人間と対話的に故障箇所の特定を行う．これにより %うむ，人間による推論も使える．．
+本手法を用いた不具合分析の流れを下図\ref{fig:fault_diagnosis_algorithm}に示す．
+本手法は人間と対話的に故障箇所の特定を行う．これにより %うむ，人間による推論も使える．．
 実機の情報をシステムに反映しながら故障箇所を絞り込むことができる．
-%図修正　数字必要ない
+%テレメトリの確認から始め，初期コマンド状態からの確認．という風にやっていくってところも欲しい
+\begin{comment}
 \begin{figure}[H]
   \centering
-    \includegraphics[height=5.6cm]{../figure/fault_diagnosis_flow.png}
+    \includegraphics[width=8cm]{../figure/System_architect.png}
+    \caption{提案手法の構成}
+    \label{fig:System_architect}
+\end{figure}
+\end{comment}
+%\subsection{探索アルゴリズム}
+\begin{figure}[H]
+  \centering
+    \includegraphics[height=5.0cm]{../figure/fault_diagnosis_algorithm.png}
     \caption{本手法による不具合分析の流れ}
-    \label{fig:fault_diagnosis_flow}
+    \label{fig:fault_diagnosis_algorithm}
 \end{figure}
 
 \subsection{モデル}%オントロジーやけどね
@@ -297,12 +305,6 @@
 %それに確率があることを説明する
 %コマンドおよびテレメトリの機能モデル%これは違うかも
 %でも状態量の更新に関して説明するために必要．
-
-%不具合分析についての流れは上で概要を説明しているので，ここではどうやって確認するためのコマンドとテレメトリの
-%組み合わせみたいなものを探しているのかについて説明する必要がある．
-\subsection{探索アルゴリズム}
-\vspace{-1zh}
-フローチャート
 
 \vspace{-1zh}
 \subsection{評価指標の提案}
