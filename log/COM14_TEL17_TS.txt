@@ -42,39 +42,30 @@ Input result(OK or NG)>>OK
 COMlink: [20] & TELlink: [] were verified
 COMtarget: [32] TELtarget: [40, 24]
 COM 13 HTR_PANEL_ON 
-         {'candidate link number': 2, 'Check link number': 1.0, 'Mean Probability of check': 0.5, 'total_COM_number': 2.0} 
-         {'impact TEL num': 8, 'Remaining Power': 3.8, 'Power consume by this COM': 2, 'Attitude': 'Keep'}
+	 {'candidate link number': 2, 'Check link number': 1.0, 'Mean Probability of check': 0.5, 'total_COM_number': 2.0} 
+	 {'impact TEL num': 8, 'Remaining Power': 3.8, 'Power consume by this COM': 2, 'Attitude': 'Keep'}
 COM 18 HTR_PROP_OFF 
-         {'candidate link number': 3, 'Check link number': 0.75, 'Mean Probability of check': 0.25, 'total_COM_number': 1.875} 
-         {'impact TEL num': 6, 'Remaining Power': 3.8, 'Power consume by this COM': -1, 'Attitude': 'Keep'}
+	 {'candidate link number': 3, 'Check link number': 0.75, 'Mean Probability of check': 0.25, 'total_COM_number': 1.875} 
+	 {'impact TEL num': 6, 'Remaining Power': 3.8, 'Power consume by this COM': -1, 'Attitude': 'Keep'}
 Please select Command above(input ID) >>13
 Command 13 ( HTR_PANEL_ON ) & Telemetry 17 ( PROP_Temp ) can verify following links
  COMlink: [] TELlink [40, 24]
 
 Please check PROP_Temp
-Input result(OK or NG)>>OK
-COMlink: [] & TELlink: [40, 24] were verified
+Input result(OK or NG)>>NG
 selected Command: [14, 13] remaining Command: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-COMtarget: [32] TELtarget: []
+COMtarget: [32] TELtarget: [40, 24]
 COM 18 HTR_PROP_OFF 
-         {'candidate link number': 1, 'Check link number': 1, 'Mean Probability of check': 1.0, 'total_COM_number': 1.0} 
-         {'impact TEL num': 6, 'Remaining Power': 3.8, 'Power consume by this COM': -1, 'Attitude': 'Keep'}
+	 {'candidate link number': 3, 'Check link number': 0.75, 'Mean Probability of check': 0.25, 'total_COM_number': 1.0} 
+	 {'impact TEL num': 6, 'Remaining Power': 3.8, 'Power consume by this COM': -1, 'Attitude': 'Keep'}
 Please select Command above(input ID) >>18
 Command 18 ( HTR_PROP_OFF ) & Telemetry 17 ( PROP_Temp ) can verify following links
- COMlink: [32] TELlink []
+ COMlink: [32] TELlink [40, 24]
 
 Please check PROP_Temp
 Input result(OK or NG)>>NG
-fault link: 32
-
-
-COM 13 HTR_PANEL_ON 
-         Pm(C): 0.5 , E(C): 1.0 , N(C): 2.0 
-         Remain Power: 3.8 , Power Consume: 2 , Impacted TEL num: 8 , Attitude: Keep
-COM 18 HTR_PROP_OFF 
-         Pm(C): 0.25 , E(C): 0.75 , N(C): 1.875 
-         Remain Power: 3.8 , Power Consume: -1 , Impacted TEL num: 6 , Attitude: Keep
-
-
-
-
+selected Command: [14, 13, 18] remaining Command: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+COMtarget: [32] TELtarget: [40, 24]
+nothing can verify
+finish
+faulty COMlink: [32] faulty TELlink: [40, 24]
