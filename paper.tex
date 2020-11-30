@@ -2,7 +2,6 @@
 
 \usepackage{mypackage}
 
-
 \newif\iffigure
 %\figurefaulse
 \figuretrue
@@ -14,7 +13,7 @@
 \makeatother
 
 \newcommand{\DATE}[3]{#1年#2月#3日} %month, day, year
-\newcommand{\TheDay}{\DATE{2020}{11}{30}}
+\newcommand{\TheDay}{\DATE{令和2}{11}{30}}
 %ヘッダとかもなくてもいいかも
 %\newcommand{\Header}{中須賀・船瀬研究室}
 
@@ -24,8 +23,7 @@
 03-183005　西本 慎吾%\thanks{shingo_n@space.t.u-tokyo.ac.jp}
 }
 
-%ヘッダの指定：
-\pagestyle{fancy}
+
 
 %ここをtrueにすると全ビルド？ではないみたい
 \newcommand{\ifdraft}{true}
@@ -42,29 +40,47 @@
 \begin{titlepage}
   \begin{center}
   \vspace*{10zh}
-  {\LARGE 東京大学工学部航空宇宙工学科\\令和2年度学士論文}
+  {\LARGE 令和2年度学士論文}
   \vspace{2zh} \\
   {\huge 衛星内の情報伝達経路モデルに基づく\\不具合分析支援に関する研究}
-   \vspace{20zh} \\
+   \vspace{25zh} \\
+   {\Large 東京大学 工学部 航空宇宙工学科}\\
+   \vspace{1zh}
    {\Large 03-183005　西本 慎吾}\\
-   {\Large 指導教員 船瀬 龍 准教授}\\
-   {\Large \TheDay}
-  \vspace{12pt} \\
+   %{\Large 西本 慎吾}\\
+  \vspace{3zh} 
+  {\large \TheDay}
+  {\large 提出}\\
+   \vspace{1zh}
+   {\large 指導教員　船瀬 龍 准教授}
+  %\vspace{12pt} \\
   \end{center}
 \end{titlepage}
 
+%ここに記号と略語の説明が必要な気がする．
 
-%あとでincludeからinputに戻すかな
+  
+%もうちょい書くべき
 \include{abstract.tex}
+%ヘッダの指定：
+\pagestyle{headings}
+\pagenumbering{roman}
+\setcounter{tocdepth}{3}
+%\addcontentsline{toc}{chapter}{目次}
 \tableofcontents
-\listoftables
+%\addcontentsline{toc}{chapter}{図目次}
 \listoffigures
+%\addcontentsline{toc}{chapter}{表目次}
+\listoftables
+\include{empty.tex}
+\pagenumbering{arabic}
 \include{introduction.tex}
 \include{methodology.tex}
-%\include{result.tex}
+%後で修正
+\include{result.tex}
 \include{conclusion.tex}
 \bibliographystyle{junsrt} %plain, acm, alpha とか
 \bibliography{Ref} 
-%\include{appreciation.tex}
+\include{appreciation.tex}
 
 \end{document}

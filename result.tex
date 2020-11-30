@@ -12,13 +12,14 @@
 以下では，まず実際に故障箇所特定が行えた事例を取り上げる．
 その結果に関して，コマンドを選択する際に優先する指標によって検証プロセスが異なること
 を述べ，評価指標に関する考察を行う．また，その例に対して
-所属する研究室の方々に実践頂いた結果との比較に関しても示している．\\
+所属する研究室の方々に実践頂いた結果と比較を行い，人間による不具合分析と本手法の違いに
+関して示す．\\
 次に，本手法のみでは故障箇所の特定を上手くできなかった事例を取り上げ，
 そこから得られた知見に関して述べる．\\
-%ここら辺もう少し見るところがある気がする．
+
 %ここはどうするかなあああ
-最後に，本手法によって扱うことのできる故障の種類に関する限界を述べ，発展させるために必要な
-方針に関して議論を行う．
+%最後に，本手法によって扱うことのできる故障の種類に関する限界を述べ，発展させるために必要な
+%方針に関して議論を行う．
 
 \newpage
 \section{実践例}
@@ -32,9 +33,8 @@
       \caption{故障箇所：リンク32(推進系ヒータ−推進系間)の時の故障候補}
       \label{fig:fault_mode1}
 \end{figure}
+%記号の定義
 
-%問題設定の与え方として，各コンポーネントの状態はどのようになっているかを示したほうが良くないか？
-%Methodologyの中で言及できているのか要確認
 図\ref{fig:fault_mode1}に示すような
 推進系ヒータ‐推進系間でのヒータ接触不良が発生している場合を考える．
 この時，異常検知の際の不具合事象としては，
@@ -62,13 +62,13 @@
 
 \begin{figure}[H]
    \centering
-      \includegraphics[height=5.0cm]{figure/COM14_TEL17_TEL_phase.png}
+      \includegraphics[height=6.0cm]{figure/COM14_TEL17_TEL_phase.png}
       \caption{テレメトリによる確認}
       \label{fig:tel_phase}
 \end{figure}
 \begin{figure}[H]
    \centering
-      \includegraphics[height=7.5cm]{figure/TEL_process_HTR_PROP_fault.png}
+      \includegraphics[height=9cm]{figure/TEL_process_HTR_PROP_fault.png}
       \caption{テレメトリの確認による故障候補切り分けの流れ}
       \label{fig:TEL_process}
 \end{figure}
@@ -76,18 +76,17 @@
 %もう少し説明が必要そう
 \begin{figure}[H]
    \centering
-      \includegraphics[height=7.0cm]{figure/COM14_TEL17_iniCOM_phase.png}
+      \includegraphics[height=8.0cm]{figure/COM14_TEL17_iniCOM_phase.png}
       \caption{初期コマンドによる情報を用いた確認}
       \label{fig:ini_COM_phase}
 \end{figure}
 \begin{figure}[H]
    \centering
-      \includegraphics[height=10.5cm]{figure/iniCOM_process_HTR_PROP_fault.png}
+      \includegraphics[height=12cm]{figure/iniCOM_process_HTR_PROP_fault.png}
       \caption{初期コマンドに影響を受けるテレメトリの確認による故障候補切り分けの流れ}
       \label{fig:iniCOM_process}
 \end{figure}
 
-\newpage
 次に，図\ref{fig:ini_COM_phase}及び図\ref{fig:iniCOM_process}に示すのが，
 不具合発生時に送信していたコマンド情報から
 考えられるテレメトリの変化を用いて故障候補の確認を行う段階である．
@@ -118,27 +117,34 @@ Attitudeに関しては，姿勢変化を起こす場合は「Change」，起こ
 
 \begin{figure}[H]
    \centering
-      \includegraphics[width=15.0cm]{figure/COM_candidate.png}
-      \caption{コマンドの選択肢表示及び検証過程}
+      \includegraphics[width=13.0cm]{figure/COM_candidate.png}
+      \caption{コマンドの探索結果の表示}
       \label{fig:COM_candidate}
 \end{figure}
-以下の図\ref{fig:COM_process_HTR_fault}に，探索されたコマンドに関して各コマンドを選択し
+以下の図\ref{fig:COM_13process_HTR_fault}，\ref{fig:COM_18process_HTR_fault}
+に，探索されたコマンドに関して各コマンドを選択し
 検証を行ったプロセスを示す．
 どちらのコマンドから開始しても最終的に，今回想定した故障箇所である「推進系ヒータ−推進系間(リンクID:32)」
 が故障箇所であると特定された．
 
 \begin{figure}[H]
    \centering
-      \includegraphics[height=8.0cm]{figure/COM_process_HTR_PROP_fault.png}
-      \caption{ヒータ接触不良時の各検証プロセスの流れ}
-      \label{fig:COM_process_HTR_fault}
+      \includegraphics[height=9.0cm]{figure/COM_13process_HTR_PROP_fault.png}
+      \caption{ヒータ接触不良時の検証プロセス（パネルヒータONからスタート）}
+      \label{fig:COM_13process_HTR_fault}
 \end{figure}
-
+\begin{figure}[H]
+   \centering
+   \includegraphics[height=9.0cm]{figure/COM_18process_HTR_PROP_fault.png}
+   \caption{ヒータ接触不良時の検証プロセス（推進系ヒータOFFからスタート）}
+   \label{fig:COM_18process_HTR_fault}
+\end{figure}
 
 \subsection{コマンドの故障候補切り分け能力を示す指標に関する考察}
 %ここの文言も微妙
 上で示した例(ヒータ接触不良)に関して，コマンドを選択する際に優先する評価指標によって
-図\ref{fig:COM_process_HTR_fault}のように検証プロセスの違いが生じた．
+図\ref{fig:COM_13process_HTR_fault}，\ref{fig:COM_18process_HTR_fault}
+のように検証プロセスの違いが生じた．
 この結果の違いに基づき，提示された評価指標が持つ意味を考察する．
 
 図\ref{fig:COM_candidate}にあるように提示された2つのコマンドを比較すると，
@@ -176,9 +182,6 @@ Attitudeに関しては，姿勢変化を起こす場合は「Change」，起こ
 絞り込みを行えないまま検証作業を終えることになる．
 このことを踏まえると，検証コマンド総数は不具合分析を最後まで行うことができる保証がある時に，
 優先的に考えることで，全体で打つコマンドの数を少なくできる可能性があると言える．
-
-%複数故障を考えた場合，指標の選択基準によって
-%探索プロセスが変化する．
 
 \subsection{本手法と人間の不具合不具合分析の違い}
 上で示した不具合事象「推進系ヒータONコマンドを送った時，推進系温度が変化しない」
@@ -267,9 +270,8 @@ Attitudeに関しては，姿勢変化を起こす場合は「Change」，起こ
 %調査結果では分析の際に故障候補を
 %故障を限定してしまっている人もいる．
 \newpage
-%別で特定できなかった事例を取り上げて設計へのフィードバック．
-%評価指標の優先順位を考えることでどのように検証結果が変化するのかを考察する．
-\subsection{故障箇所の特定ができなかった例（温度計故障）}%???
+
+\subsection{故障箇所の特定ができなかった例（温度計故障）}
 次に，以下の図\ref{fig:fault_mode2}に示すような
 温度計故障（断線）を考え検証を行った例に関して述べる．
 この時，異常検知の際の不具合事象としては，上の事例と同じく
@@ -332,7 +334,7 @@ Attitudeに関しては，姿勢変化を起こす場合は「Change」，起こ
 を確認することができる．
 
 %時間があれば
-\section{本手法に関する考察}
+%\section{本手法に関する考察}
 
 
 \begin{comment}

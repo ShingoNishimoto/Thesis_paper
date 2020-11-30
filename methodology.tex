@@ -4,7 +4,7 @@
 \begin{document}
 \fi
 
-\chapter{情報伝達経路モデルに基づく対話的不具合分析手法の仕様}
+\chapter{情報伝達経路モデルに基づく不具合分析支援手法の仕様}
 
 \section{概要}
 本研究では，衛星の不具合分析において故障仮説の検証を支援するシステムを提案する．
@@ -52,7 +52,7 @@
 %ただし，OK　NGという簡単なフィードバック．パラメータ的な状態量は組み込めていない
 \begin{figure}[H]
    \centering
-     \includegraphics[height=6.0cm]{figure/whole_flow.png}
+     \includegraphics[height=5.7cm]{figure/whole_flow.png}
      \caption{本手法による不具合分析の構成}
      \label{fig:whole_flow}
  \end{figure}
@@ -92,11 +92,15 @@
 %ここにモデルの説明
 %これらのモデルに基づいて，実装上ではどのようなオブジェクトが生成され
 %どのように関係しているのかを図示できたほうがいい
-\section{事前定義モデル}
-次に，以上で述べたアルゴリズムで不具合分析を行うために必要なモデル
-に関して，具体的なテストケースをベースにして説明する．%言い回し
+\newpage
+\section{モデル}
+次に，以上で述べた流れで不具合分析を行うために必要なモデル
+に関して，具体的なテストケースに基づいて述べる．%言い回し
+以下で示す各モデルに関する図表は，テストケースで作成したものになっているが，
+モデルの内容自体はこれに限らず他の衛星モデルに対しても適用可能である．
 
 %これも既にモデル．先にどんなモデルが必要になるのかをまとめておいたほうがいいのか？
+%テストケースという言葉が適切なのか？
 \subsection{対象とするテストケース}
 今回，以下の図\ref{fig:simple_sat}の
 ような簡易衛星モデルを対象にしてモデルの定義及び
@@ -109,13 +113,35 @@
    \item Power：電源
    \item Heat：熱
 \end{itemize}
-%ここ少し修正
+\begin{table}[H]
+   \centering
+   \caption{簡易衛星モデル(図\ref{fig:simple_sat})における略語の意味}
+   \label{tab:compo description}
+   \scalebox{0.95}{
+      \begin{tabular}{lcl|lcl} \hline
+         GS&:&地上局&MOBC&:&メインOBC\footnotemark[1]\\
+         PCU&:&電源操作コンポーネント&TOBC&:&熱系OBC\footnotemark[1]\\
+         AOBC&:&姿勢系OBC\footnotemark[1]&MIF&:&ミッション系OBC\footnotemark[1]\\
+         XTx&:&Xバンド送信機&STx&:&Sバンド送信機\\
+         SRx&:&Sバンド受信機&HTR\_PROP&:&推進系ヒータ\\
+         HTR\_PANEL&:&パネルヒータ&HTR\_BAT&:&バッテリヒータ\\
+         HTR\_CAM&:&カメラヒータ&TS\_PROP&:&推進系温度計\\
+         TS\_PANEL&:&パネル温度計&TS\_BAT&:&バッテリ温度計\\
+         TS\_CAM&:&カメラ温度計&PROP&:&推進系コンポーネント\\
+         PANEL&:&衛星筐体パネル&BAT&:&バッテリ\\
+         CAM&:&カメラ&AOCS&:&姿勢制御コンポーネント\\ \hline
+      \end{tabular}
+      }
+\end{table}
+\footnotetext[1]{OBC : On Board Computer}
+%記号の定義に関する図，表が欲しい
 \begin{figure}[H]
    \centering
       \includegraphics[height=13.0cm]{figure/satellite_diagram.png}
       \caption{衛星内コンポーネントの接続関係図(矢印の数字はリンクのID)}
       \label{fig:simple_sat}
 \end{figure}
+%ここに記号に対する図．それか上ページの空欄
 
 \newpage
 \subsection{各コンポーネント間の接続関係モデル}
@@ -148,7 +174,7 @@
 \vspace{-2zh}
 \begin{figure}[H]
    \centering
-      \includegraphics[height=11cm]{figure/link_definition.png}
+      \includegraphics[height=10cm]{figure/link_definition.png}
 \end{figure}
 \newpage
 次に，コンポーネントの定義を行う．以下の表\ref{tab:compo_link}では，
@@ -289,7 +315,7 @@ JAXA\cite{JAXA2020}は，衛星と衛星搭載機器の機能をモデル化し�
 
 \begin{figure}[H]
    \centering
-      \includegraphics[height=8.0cm]{figure/whole_fault_diagnosis_flow.png}
+      \includegraphics[height=9.0cm]{figure/whole_fault_diagnosis_flow.png}
       \caption{故障仮説検証の流れ}
       \label{fig:whole_fault_flow}
 \end{figure}
@@ -317,7 +343,7 @@ JAXA\cite{JAXA2020}は，衛星と衛星搭載機器の機能をモデル化し�
 
 \begin{figure}[H]
    \centering
-      \includegraphics[height=9.0cm]{figure/veri_COM_search.png}
+      \includegraphics[height=10.0cm]{figure/veri_COM_search.png}
       \caption{検証用コマンド探索アルゴリズム}
       \label{fig:veri_COM_algorithm}
 \end{figure}
@@ -739,6 +765,7 @@ Case 2-1では故障候補をリンク3もしくは5に絞り込むことがで�
 少ないコマンド数で検証を終えることが可能なのかを人間が直感的に認識することが可能になる．
 また検証プロセスにおいて，前検証結果に応じて検証コマンド総数は更新され，コマンド選択を行う際に
 どのコマンドを選択すれば最終的に早く検証を終えることができるのかを示すことができる．\\
+
 ここで，以上で示したコマンドの故障候補切り分け能力を示す指標を以下に再掲する．
 \begin{itemize}
    \item 平均確認可能性及び確認可能リンク数
@@ -874,6 +901,9 @@ $\mathbb{R}_k$に含まれる故障候補の集合を，
 よって，運用時は上で示した全ての指標を元に，コマンドによって二次故障などが
 発生するリスクと，故障候補切り分けの効率のトレードオフを考慮し
 コマンドの選択を行う必要がある．
+
+%作成したシステムの構成みたいなものを入れられるといいかもしれない
+%終わったら考える．
 
 
 \expandafter\ifx\csname ifdraft\endcsname\relax
